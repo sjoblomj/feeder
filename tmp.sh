@@ -9,13 +9,13 @@ for site in "${sites[@]}"; do
     insertValues=$(echo "$site" | yq e '.insertValues' -)
 
     case "$type" in
-        "rss")
+       # "rss")
        #     data=$(./rss.sh "$url");;
-        "youtrack")
+       # "youtrack")
        #     data=$(./youtrack.sh "$url");;
-        "gitlab")
+       # "gitlab")
        #     data=$(./gitlab.sh "$url");;
-        "github*")
+        "github")
             data=$(./github.sh "$url");;
         *)
             data="";;

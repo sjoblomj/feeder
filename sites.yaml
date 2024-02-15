@@ -9,7 +9,7 @@ sites:
 
   - name: JetBrains Native Wayland Support
     icon: "https://youtrack.jetbrains.com/static/apple-touch-icon-180x180.png"
-    url: "https://youtrack.jetbrains.com/issue/JBR-3206"
+    url: "https://youtrack.jetbrains.com/api/issues/JBR-3206"
     type: youtrack
 
   - name: VTE Sixel Implementation
@@ -20,52 +20,52 @@ sites:
   - name: Zelda3
     icon: "https://user-images.githubusercontent.com/114783946/193422264-36e59bac-68b4-437f-819d-ea292efa6466.png"
     url: "https://github.com/snesrev/zelda3/commits/"
-    type: github_commits
+    type: github
 
   - name: AntiMicroX QT6 Task list
     icon: "https://raw.githubusercontent.com/AntiMicroX/antimicrox/master/src/images/antimicrox.png"
     url: "https://github.com/AntiMicroX/antimicrox/issues/446"
-    type: github_issue
+    type: github
 
   - name: AntiMicroX QT6 PR
     icon: "https://raw.githubusercontent.com/AntiMicroX/antimicrox/master/src/images/antimicrox.png"
     url: "https://github.com/AntiMicroX/antimicrox/issues/919"
-    type: github_issue
+    type: github
 
   - name: AntiMicroX Releases
     icon: "https://raw.githubusercontent.com/AntiMicroX/antimicrox/master/src/images/antimicrox.png"
     url: "https://github.com/AntiMicroX/antimicrox/releases"
-    type: github_releases
+    type: github
 
   - name: Waybar Releases
     icon: "https://static.vecteezy.com/system/resources/previews/019/527/051/non_2x/an-8-bit-retro-styled-pixel-art-illustration-of-an-iron-bar-ingot-free-png.png"
     url: "https://github.com/Alexays/Waybar/releases"
-    type: github_releases
+    type: github
 
   - name: labwc Task switcher
     icon: "https://raw.githubusercontent.com/labwc/labwc/17bad48d87f5550dcdd16a03fd95b9bd9ebc73b3/data/labwc.svg"
     url: "https://github.com/labwc/labwc/issues/1341"
-    type: github_issue
+    type: github
 
   - name: labwc Task switcher fix PR
     icon: "https://raw.githubusercontent.com/labwc/labwc/17bad48d87f5550dcdd16a03fd95b9bd9ebc73b3/data/labwc.svg"
     url: "https://github.com/labwc/labwc/pull/1533"
-    type: github_issue
+    type: github
 
   - name: labwc Releases
     icon: "https://raw.githubusercontent.com/labwc/labwc/17bad48d87f5550dcdd16a03fd95b9bd9ebc73b3/data/labwc.svg"
     url: "https://github.com/labwc/labwc/releases"
-    type: github_releases
+    type: github
 
   - name: Terminator Releases
     icon: "https://avatars.githubusercontent.com/u/63008829?s=200&v=4"
     url: "https://github.com/gnome-terminator/terminator"
-    type: github_releases
+    type: github
 
   - name: ImHex Releases
     icon: "https://raw.githubusercontent.com/WerWolv/ImHex/cc8a1ccc8b90493ac5e71349cb8c2be804fb8ff9/resources/icon.svg"
     url: "https://github.com/WerWolv/ImHex/releases"
-    type: github_releases
+    type: github
 
   - name: Gimp News
     icon: "https://raw.githubusercontent.com/GNOME/gimp/de8f7fd4b8e8711d9167bbdd27bd089a39a863b0/icons/Default/scalable/gimp-wilber.svg"
