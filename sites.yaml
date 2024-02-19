@@ -9,7 +9,7 @@ sites:
 
   - name: JetBrains Native Wayland Support
     icon: "https://youtrack.jetbrains.com/static/apple-touch-icon-180x180.png"
-    url: "https://youtrack.jetbrains.com/api/issues/JBR-3206"
+    url: "https://youtrack.jetbrains.com/issue/JBR-3206"
     type: youtrack
 
   - name: VTE Sixel Implementation
@@ -59,7 +59,7 @@ sites:
 
   - name: Terminator Releases
     icon: "https://avatars.githubusercontent.com/u/63008829?s=200&v=4"
-    url: "https://github.com/gnome-terminator/terminator"
+    url: "https://github.com/gnome-terminator/terminator/releases"
     type: github
 
   - name: ImHex Releases

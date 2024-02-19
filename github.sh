@@ -1,6 +1,18 @@
 #!/bin/bash
 url="$1"
 
+if [[ $url =~ ^https://(api\.|www\.)?github.com/(repos/)?([^/]+)/([^/]+)/(.*)$ ]]; then
+    rep="${BASH_REMATCH[3]}/${BASH_REMATCH[4]}/${BASH_REMATCH[5]}"
+    url="https://api.github.com/repos/$rep"
+    url=$(echo $url | sed "s|/$||")
+    if [[ $url =~ ^.*/pull/[0-9]+$ ]]; then
+        url=$(echo $url | sed -r "s|pull/([0-9]+)|issues/\1|")
+    fi
+else
+    echo "Could not understand URL '$url'"
+    exit 1
+fi
+
 function perform_query() {
   uri="$1"
   command="$2"
