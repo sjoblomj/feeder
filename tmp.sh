@@ -5,10 +5,10 @@ for site in "${sites[@]}"; do
     name=$(echo "$site" | yq e '.name' -)
     icon=$(echo "$site" | yq e '.icon' -)
     url=$(echo  "$site" | yq e '.url'  -)
-    type=$(echo "$site" | yq e '.type' -)
+    parser=$(echo "$site" | yq e '.parser' -)
     insertValues=$(echo "$site" | yq e '.insertValues' -)
 
-    case "$type" in
+    case "$parser" in
         "rss")
             data=$(./rss.sh "$url");;
         "youtrack")
@@ -25,6 +25,6 @@ for site in "${sites[@]}"; do
     echo "$data"
     echo
     echo
-#    echo "name: $name, icon: $icon, url: $url, type: $type, insertValues: $insertValues"
+#    echo "name: $name, icon: $icon, url: $url, parser: $parser, insertValues: $insertValues"
 done
 
