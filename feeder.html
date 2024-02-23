@@ -1,0 +1,208 @@
+<!doctype html>
+<html>
+    <head>
+        <title>Feeder</title>
+        <meta charset="utf-8">
+        <link href="feeder.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div id="content"></div>
+        <div id="save">Save</div>
+        <script type="text/javascript">
+            let seenEntries = [];
+            let hasUnsaved = false;
+
+            function save() {
+                const a = document.createElement("a");
+                a.href = URL.createObjectURL(new Blob(
+                    [JSON.stringify(seenEntries)],
+                    { type:"text/json"}
+                ));
+                a.download = "seenentries.json";
+                a.click();
+                a.remove();
+
+                hasUnsaved = false;
+                let saveBtn = document.getElementById("save");
+                saveBtn.style.display = "none";
+            }
+
+            function getSeenEntriesForSite(siteName) {
+                let entries = seenEntries.find(ent => ent.name === siteName);
+                if (!entries || !entries.data)
+                    return [];
+                return entries.data;
+            }
+
+            function enableSaveButton() {
+                hasUnsaved = true;
+                let saveBtn = document.getElementById("save");
+                saveBtn.style.display = "block";
+                saveBtn.onclick = e => save();
+            }
+
+            function markAsSeen(siteName, id, updated) {
+                function remove(array, element) {
+                    let index = array.indexOf(element);
+                    if (index > -1) {
+                        array.splice(index, 1);
+                    }
+                }
+
+                let site = seenEntries.find(ent => ent.name === siteName);
+                if (site && !site.data) {
+                    remove(seenEntries, site);
+                    site = undefined;
+                }
+                if (!site) {
+                    site = {"name": siteName, "data": [{"id": id, "updated": updated}]};
+                    seenEntries.push(site);
+                    enableSaveButton();
+                    return;
+                }
+
+                let data = site.data.find(d => d.id === id);
+                if (!data || data.updated !== updated) {
+                    remove(site.data, data);
+                    site.data.push({"id": id, "updated": updated});
+                    enableSaveButton();
+                }
+            }
+
+            function handleIcons(imgDiv, mouseOverText, pictureUrl, pictureFallbackText, imageClassName, eyeDivOnclick) {
+                let eyeDiv = document.createElement("div");
+                eyeDiv.className = "eye";
+                eyeDiv.style = "display: none";
+                eyeDiv.title = mouseOverText;
+                let img;
+                if (pictureUrl) {
+                    img = document.createElement("img");
+                    img.src = pictureUrl;
+                    img.className = "";
+                } else {
+                    img = document.createElement("div");
+                    img.className = "fallbackIcon ";
+                    img.appendChild(document.createTextNode(pictureFallbackText));
+                }
+                img.className += imageClassName;
+                imgDiv.onmouseenter = e => {
+                    img.style = "display: none";
+                    eyeDiv.style = "display: block";
+                }
+                imgDiv.onmouseout = e => {
+                    let target = e.relatedTarget;
+                    if (target === imgDiv || target === img || target === eyeDiv)
+                        return;
+                    img.style = "";
+                    eyeDiv.style = "display: none";
+                }
+                eyeDiv.onclick = eyeDivOnclick;
+
+                imgDiv.appendChild(img);
+                imgDiv.appendChild(eyeDiv);
+            }
+
+            function createFeedElement(siteDiv, data, siteName) {
+                let root   = document.createElement("div");
+                let author = document.createElement("div");
+                let imgDiv = document.createElement("div");
+                let body   = document.createElement("div");
+                let title  = document.createElement("div");
+                let text   = document.createElement("div");
+
+                let seenEntries = getSeenEntriesForSite(siteName);
+                let isSeen = seenEntries.find(entry => entry.id === data.id && entry.updated === data.updated);
+
+                root  .className = "feedElement" + (isSeen ? " read" : " unread");
+                author.className = "feedElementAuthor";
+                imgDiv.className = "feedElementImg";
+                body  .className = "feedElementBody";
+                title .className = "feedElementTitle";
+                text  .className = "feedElementText";
+                root.setAttribute("name", siteName);
+
+                let userName = data.user ? data.user : "";
+                let initials = userName
+                    .replace(/,.-_/, " ")
+                    .split(" ")
+                    .map(i => i.charAt(0))
+                    .join("")
+                    .substr(0, 2);
+
+                let eyeDivOnclick = e => {
+                    markAsSeen(siteName, data.id, data.updated);
+                    root.className = "feedElement read";
+                }
+                handleIcons(imgDiv, "Mark entry as read", data.userPicture, initials, "feedElementAuthorIcon", eyeDivOnclick);
+
+                author.appendChild(imgDiv);
+                let auth = document.createElement("div");
+                auth.appendChild(document.createTextNode(data.user));
+                auth.title = data.user;
+                auth.className = "feedElementAuthorName";
+                author.appendChild(auth);
+
+                let a = document.createElement("a");
+                a.className = "feedElementTitleText";
+                if (data.url)
+                    a.href = data.url;
+                a.appendChild(document.createTextNode(data.title ? data.title : "Update"));
+                let dates = document.createElement("div");
+                dates.className = "feedElementTitleDates";
+                dates.appendChild(document.createTextNode(" — Created: " + data.created + (data.updated ? ", Updated: " + data.updated : "")));
+                title.appendChild(a);
+                title.appendChild(dates);
+                text.insertAdjacentHTML('afterbegin', data.text);
+
+                body.appendChild(title);
+                body.appendChild(text);
+                root.appendChild(author);
+                root.appendChild(body);
+                siteDiv.appendChild(root);
+            }
+
+            function insertFeed(siteDiv, siteData) {
+                let div = document.createElement("div");
+                div.className = "feedHeader";
+
+                let imgDiv = document.createElement("div");
+                imgDiv.className = "feedHeaderImg";
+
+                let eyeDivOnclick = e => {
+                    siteData.data.forEach(d => markAsSeen(siteData.name, d.id, d.updated));
+                    let entries = document.getElementsByName(siteData.name);
+                    entries.forEach(ent => ent.className = "feedElement read");
+                }
+                handleIcons(imgDiv, "Mark all entries as read", siteData.icon, "Site", "", eyeDivOnclick);
+
+                let a = document.createElement("a");
+                a.href = siteData.url;
+                a.appendChild(document.createTextNode(siteData.name));
+                let h2 = document.createElement("h2");
+
+                h2.appendChild(a);
+                div.appendChild(imgDiv);
+                div.appendChild(h2);
+                siteDiv.appendChild(div);
+            }
+
+            Promise.all([
+                fetch("sitedata.json").then(res => res.json()),
+                fetch("seenentries.json").then(res => res.json())
+            ]).then(([sites, seenEntriesJson]) => {
+                seenEntries = seenEntriesJson;
+
+                sites.forEach(site => {
+                    let root = document.getElementById("content");
+                    let siteDiv = document.createElement("div");
+                    siteDiv.className = "site";
+
+                    insertFeed(siteDiv, site);
+                    site.data.forEach(data => createFeedElement(siteDiv, data, site.name));
+
+                    root.appendChild(siteDiv);
+                });
+            });
+        </script>
+    </body>
+</html>

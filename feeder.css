@@ -1,0 +1,124 @@
+:root{
+    --icon-size: 64px;
+}
+body {
+    background-color: #feefdd;
+}
+a {
+    text-decoration: none;
+}
+
+#save {
+    background: #fa6607;
+    width:  10em;
+    height:  2em;
+    right:   1em;
+    top:     1em;
+    text-align: center;
+    position: fixed;
+    border-radius: 1em;
+    cursor: pointer;
+    display: none;
+}
+#content {
+    display: flex;
+    flex-wrap: wrap;
+}
+.site {
+    width: 50%;
+    height: 71vh;
+    min-height: 10em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    margin-bottom: 2em;
+}
+.read {
+    opacity: 0.4;
+}
+
+.feedHeader {
+    text-align: center;
+}
+.feedHeaderImg {
+    display: inline-block;
+    vertical-align: middle;
+    padding-right: 1em;
+}
+.feedHeader h2 {
+    display: inline-block;
+    vertical-align: middle;
+}
+.feedHeader img {
+    vertical-align: middle;
+    height: var(--icon-size);
+    width:  var(--icon-size);
+}
+
+.feedElement {
+    display: flex;
+}
+.feedElementTitle {
+    width: fit-content;
+    display: flex;
+    border: 1px gray;
+    border-style: none none solid none;
+    padding: 1ex;
+}
+.feedElementTitleText {
+    font-weight: bold;
+}
+.feedElementTitleDates {
+    font-size: small;
+    padding: 2px 0 0 1ex;
+}
+
+.feedElementText {
+    padding: 1ex;
+    min-height: calc(var(--icon-size) - 1em);
+    overflow: hidden;
+}
+
+.feedElementAuthor {
+    margin: 1ex;
+    text-align: center;
+}
+.feedElementAuthorIcon {
+    border-radius: 50%;
+    display: block;
+    width:  var(--icon-size);
+    height: var(--icon-size);
+}
+.feedElementAuthorName {
+    width: var(--icon-size);
+    font-size: small;
+    overflow: hidden;
+}
+
+.fallbackIcon {
+    background: #fa6607;
+    color: #fff;
+    line-height: var(--icon-size);
+    font-weight: bold;
+    font-size: x-large;
+}
+
+.eye {
+    cursor: pointer;
+    margin: 1ex;
+    width:  calc(var(--icon-size) * 0.66);
+    height: calc(var(--icon-size) * 0.66);
+    border: solid 2px black;
+    border-radius: 75% 15%;
+    transform: rotate(45deg);
+}
+.eye:before {
+    content: '';
+    display: block;
+    position: relative;
+    border: solid 2px black;
+    border-radius: 50%;
+    width:  calc(var(--icon-size) * 0.66 / 3);
+    height: calc(var(--icon-size) * 0.66 / 3);
+    left:   calc(var(--icon-size) * 0.66 / 3.5);
+    top:    calc(var(--icon-size) * 0.66 / 3.5);
+}
