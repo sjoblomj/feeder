@@ -81,3 +81,12 @@ sites:
     insertValues:
       - userPicture: "https://149909199.v2.pressablecdn.com/wp-content/uploads/2014/10/Tim.png"
 
+  - name: Phoronix
+    url:  "https://www.phoronix.com/rss.php"
+    icon: "https://www.phoronix.com/android-chrome-192x192.png"
+    parser: rss
+    insertValues:
+      - user: Michael Larabel
+      - userPicture: "https://www.phoronix.com/assets/categories/michaellarabel.webp"
+    filters:
+      - filter: wayland

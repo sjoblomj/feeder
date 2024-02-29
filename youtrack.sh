@@ -1,6 +1,7 @@
 #!/bin/bash
 maxelems="$1"
 url="$2"
+filter="${3:-.*}"
 
 if [[ $url =~ ^https://youtrack.jetbrains.com/(api/issues|issue)/(JBR-[0-9]+)/?$ ]]; then
     issuenumber="${BASH_REMATCH[2]}"
@@ -14,4 +15,4 @@ base=$(curl -s "${url}?%24top=-1&fields=description,id,usesMarkdown,created,upda
 
 comments=$(curl -s "${url}/activitiesPage?categories=CommentsCategory&reverse=true&fields=activities(added(author(name,avatarUrl),id,updated,created,text,usesMarkdown,files),timestamp)" -H "Accept: application/json" | jq --arg maxelems "$maxelems" '.activities | map(.added.[]) | map({"id": .id, "user": .author.name, "userPicture": .author.avatarUrl, "text": .text, "created": (if .created == null then null else .created / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "updated": (if .updated == null then null else .updated / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "title": null}) | sort_by(.created) | reverse | [limit($maxelems | tonumber; .[])]')
 
-jq --argjson arr1 "$base" --argjson arr2 "$comments" -n '[$arr1] + $arr2 | sort_by(.created) | reverse'
+jq --argjson arr1 "$base" --argjson arr2 "$comments" --arg filter "$filter" -n '[$arr1] + $arr2 | map(select(.title + " " + .text | ascii_downcase | test($filter | ascii_downcase))) | sort_by(.created) | reverse'
