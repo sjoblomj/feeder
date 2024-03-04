@@ -95,8 +95,6 @@ a {
 }
 
 .fallbackIcon {
-    background: #fa6607;
-    color: #fff;
     line-height: var(--icon-size);
     font-weight: bold;
     font-size: x-large;
