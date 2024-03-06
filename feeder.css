@@ -7,6 +7,12 @@ body {
 a {
     text-decoration: none;
 }
+h1 {
+    text-align: center;
+    text-decoration: underline;
+    padding-top: 1em;
+    font-size: xxx-large;
+}
 
 #save {
     background: #fa6607;
@@ -20,7 +26,7 @@ a {
     cursor: pointer;
     display: none;
 }
-#content {
+.content {
     display: flex;
     flex-wrap: wrap;
 }

@@ -6,9 +6,19 @@
         <link href="feeder.css" rel="stylesheet" type="text/css">
     </head>
     <body>
-        <div id="content"></div>
+        <div id="contentWithUpdates" class="content"></div>
+        <div id="contentWithoutUpdates" class="content"></div>
         <div id="save">Save</div>
+
         <script type="text/javascript">
+            const updatedText = "Sites with updates";
+            const notUpdatedText = "Sites without updates";
+            const markAsReadText = "Mark entry as read";
+            const markAllAsReadText = "Mark all entries as read";
+            const defaultTitleText = "Comment";
+            const createdTimestampText = "Created";
+            const updatedTimestampText = "Updated";
+
             let seenEntries = [];
             let hasUnsaved = false;
 
@@ -57,13 +67,6 @@
                 hasUnsaved = false;
                 let saveBtn = document.getElementById("save");
                 saveBtn.style.display = "none";
-            }
-
-            function getSeenEntriesForSite(siteName) {
-                let entries = seenEntries.find(ent => ent.name === siteName);
-                if (!entries || !entries.data)
-                    return [];
-                return entries.data;
             }
 
             function enableSaveButton() {
@@ -154,10 +157,7 @@
                 let title  = document.createElement("div");
                 let text   = document.createElement("div");
 
-                let seenEntries = getSeenEntriesForSite(siteName);
-                let isSeen = seenEntries.find(entry => entry.id === data.id && entry.updated === data.updated);
-
-                root  .className = "feedElement" + (isSeen ? " read" : " unread");
+                root  .className = "feedElement" + (data.isUpdated ? " unread" : " read");
                 author.className = "feedElementAuthor";
                 imgDiv.className = "feedElementImg";
                 body  .className = "feedElementBody";
@@ -171,7 +171,7 @@
                     markAsSeen(siteName, data.id, data.updated);
                     root.className = "feedElement read";
                 }
-                handleIcons(imgDiv, "Mark entry as read", data.userPicture, userName, "feedElementAuthorIcon", eyeDivOnclick);
+                handleIcons(imgDiv, markAsReadText, data.userPicture, userName, "feedElementAuthorIcon", eyeDivOnclick);
 
                 author.appendChild(imgDiv);
                 let auth = document.createElement("div");
@@ -184,13 +184,13 @@
                 a.className = "feedElementTitleText";
                 if (data.url)
                     a.href = data.url;
-                a.appendChild(document.createTextNode(data.title ? data.title : "Update"));
+                a.appendChild(document.createTextNode(data.title ? data.title : defaultTitleText));
                 let dates = document.createElement("div");
                 dates.className = "feedElementTitleDates";
-                dates.appendChild(document.createTextNode(" — Created: " + data.created + (data.updated ? ", Updated: " + data.updated : "")));
+                dates.appendChild(document.createTextNode(" — " + createdTimestampText + ": " + data.created + (data.updated ? ", " + updatedTimestampText + ": " + data.updated : "")));
                 title.appendChild(a);
                 title.appendChild(dates);
-                text.insertAdjacentHTML('afterbegin', data.text);
+                text.insertAdjacentHTML("afterbegin", data.text);
 
                 body.appendChild(title);
                 body.appendChild(text);
@@ -211,7 +211,7 @@
                     let entries = document.getElementsByName(siteData.name);
                     entries.forEach(ent => ent.className = "feedElement read");
                 }
-                handleIcons(imgDiv, "Mark all entries as read", siteData.icon, "Site", "", eyeDivOnclick);
+                handleIcons(imgDiv, markAllAsReadText, siteData.icon, "Site", "", eyeDivOnclick);
 
                 let a = document.createElement("a");
                 a.href = siteData.url;
@@ -231,15 +231,33 @@
                 seenEntries = seenEntriesJson;
 
                 sites.forEach(site => {
-                    let root = document.getElementById("content");
-                    let siteDiv = document.createElement("div");
-                    siteDiv.className = "site";
-
-                    insertFeed(siteDiv, site);
-                    site.data.forEach(data => createFeedElement(siteDiv, data, site.name));
-
-                    root.appendChild(siteDiv);
+                    let seen = seenEntriesJson.find(e => e.name === site.name)?.data || [];
+                    site.data.map(data => data["isUpdated"] = !seen.some(e => e.id === data.id && e.updated === data.updated));
                 });
+
+                let sitesWithUpdates    = sites.filter(s => s.data.some(e => e.isUpdated));
+                let sitesWithoutUpdates = sites.filter(s => !sitesWithUpdates.map(e => e.name).includes(s.name));
+
+                function processSites(sites, siteHeaderText, rootElementName) {
+                    let root = document.getElementById(rootElementName);
+                    if (sites.length > 0) {
+                        let h1 = document.createElement("h1");
+                        h1.appendChild(document.createTextNode(siteHeaderText));
+                        document.body.insertBefore(h1, root);
+                    }
+
+                    sites.forEach(site => {
+                        let siteDiv = document.createElement("div");
+                        siteDiv.className = "site";
+
+                        insertFeed(siteDiv, site);
+                        site.data.forEach(data => createFeedElement(siteDiv, data, site.name));
+
+                        root.appendChild(siteDiv);
+                    });
+                }
+                processSites(sitesWithUpdates, updatedText, "contentWithUpdates");
+                processSites(sitesWithoutUpdates, notUpdatedText, "contentWithoutUpdates");
             });
         </script>
     </body>
