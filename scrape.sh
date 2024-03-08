@@ -14,18 +14,12 @@ for site in "${sites[@]}"; do
 
     echo "Fetching $name ..."
 
-    case "$parser" in
-        "rss")
-            data=$(./rss.sh      $maxelems "$url" "$filters");;
-        "youtrack")
-            data=$(./youtrack.sh $maxelems "$url" "$filters");;
-        "gitlab")
-            data=$(./gitlab.sh   $maxelems "$url" "$filters");;
-        "github")
-            data=$(./github.sh   $maxelems "$url" "$filters");;
-        *)
-            data="";;
-    esac
+    if [ -f parsers/"$parser".sh ]; then
+        data=$(./parsers/"$parser".sh $maxelems "$url" "$filters")
+    else
+        echo "Unable to find parser '$parser'"
+        data=""
+    fi
 
     if [[ "$insertValues" != "{}" ]]; then
         data=$(jq -n --argjson a "$data" --argjson b "$insertValues" '$a | map(. + $b)')
