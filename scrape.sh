@@ -11,6 +11,11 @@ for site in "${sites[@]}"; do
     parser=$( echo "$site" | yq e '.parser' -)
     filters=$(echo "$site" | yq e '.filters.[]' - | jq -r 'add? // {}')
     insertValues=$(echo "$site" | yq e '.insertValues' - | jq 'add? // {}')
+    displayUrl=$(  echo "$site" | yq e '.displayUrl'   -)
+
+    if [[ "$displayUrl" == "null" ]]; then
+        displayUrl="$url"
+    fi
 
     echo "Fetching $name ..."
 
@@ -24,7 +29,7 @@ for site in "${sites[@]}"; do
     if [[ "$insertValues" != "{}" ]]; then
         data=$(jq -n --argjson a "$data" --argjson b "$insertValues" '$a | map(. + $b)')
     fi
-    siteData=$(echo $data | jq --arg name "$name" --arg icon "$icon" --arg url "$url" --argjson data "$data" '{"name": $name, "icon": $icon, "url": $url, "data": $data}')
+    siteData=$(echo $data | jq --arg name "$name" --arg icon "$icon" --arg url "$displayUrl" --argjson data "$data" '{"name": $name, "icon": $icon, "url": $url, "data": $data}')
 
     delimiter=""
     if [[ "$output" != "" ]]; then
