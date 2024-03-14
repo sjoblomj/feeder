@@ -185,9 +185,18 @@
                 if (data.url)
                     a.href = data.url;
                 a.appendChild(document.createTextNode(data.title ? data.title : defaultTitleText));
+
+                function tidyTimestamp(ts) {
+                    if (!ts)
+                        return ts;
+                    return ts.replace(/.000Z$/, "").replace(/T00:00:00$/, "").replace(/T/, " ").replace(/Z/, "");
+                }
+                let created = tidyTimestamp(data.created);
+                let updated = tidyTimestamp(data.updated);
+
                 let dates = document.createElement("div");
                 dates.className = "feedElementTitleDates";
-                dates.appendChild(document.createTextNode(" — " + createdTimestampText + ": " + data.created + (data.updated ? ", " + updatedTimestampText + ": " + data.updated : "")));
+                dates.appendChild(document.createTextNode(" — " + createdTimestampText + ": " + created + (updated ? ", " + updatedTimestampText + ": " + updated : "")));
                 title.appendChild(a);
                 title.appendChild(dates);
                 text.insertAdjacentHTML("afterbegin", data.text);
