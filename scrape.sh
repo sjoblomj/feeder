@@ -20,7 +20,7 @@ for site in "${sites[@]}"; do
     echo "Fetching $name ..."
 
     if [ -f parsers/"$parser".sh ]; then
-        data=$(./parsers/"$parser".sh $maxelems "$url" "$filters")
+        data=$(./parsers/"$parser".sh "$url" "$filters" $maxelems)
     else
         echo "Unable to find parser '$parser'"
         data=""
