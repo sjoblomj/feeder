@@ -1,6 +1,7 @@
 sites:
   - name: Settlers2.net
     url:  "https://settlers2.net/rss.xml"
+    displayUrl: "https://settlers2.net/blog"
     icon: "https://raw.githubusercontent.com/Merri/settlers2/v4/public/design/castle.png"
     parser: rss
     insertValues:
@@ -22,6 +23,11 @@ sites:
     icon: "https://user-images.githubusercontent.com/114783946/193422264-36e59bac-68b4-437f-819d-ea292efa6466.png"
     parser: github
 
+  - name: Zelda3 AppImage package
+    url:  "https://github.com/snesrev/zelda3/pull/248"
+    icon: "https://user-images.githubusercontent.com/114783946/193422264-36e59bac-68b4-437f-819d-ea292efa6466.png"
+    parser: github
+
   - name: AntiMicroX QT6 Task list
     url:  "https://github.com/AntiMicroX/antimicrox/issues/446"
     icon: "https://raw.githubusercontent.com/AntiMicroX/antimicrox/master/src/images/antimicrox.png"
@@ -35,11 +41,6 @@ sites:
   - name: AntiMicroX Releases
     url:  "https://github.com/AntiMicroX/antimicrox/releases"
     icon: "https://raw.githubusercontent.com/AntiMicroX/antimicrox/master/src/images/antimicrox.png"
-    parser: github
-
-  - name: Waybar Releases
-    url:  "https://github.com/Alexays/Waybar/releases"
-    icon: "https://static.vecteezy.com/system/resources/previews/019/527/051/non_2x/an-8-bit-retro-styled-pixel-art-illustration-of-an-iron-bar-ingot-free-png.png"
     parser: github
 
   - name: labwc Task switcher
@@ -67,15 +68,30 @@ sites:
     icon: "https://raw.githubusercontent.com/WerWolv/ImHex/cc8a1ccc8b90493ac5e71349cb8c2be804fb8ff9/resources/icon.svg"
     parser: github
 
+  - name: lximage-qt Releases
+    url:  "https://github.com/lxqt/lximage-qt/releases"
+    icon: "https://avatars.githubusercontent.com/u/32845505?s=200&v=4"
+    parser: github
+
+  - name: mark2epub footnotes PR
+    url:  "https://github.com/AlexPof/mark2epub/pull/3"
+    icon: "https://upload.wikimedia.org/wikipedia/commons/f/f2/Epub_logo_color.svg"
+    parser: github
+
+  - name: GIMP 3.0.0 release
+    url:  "https://gitlab.gnome.org/GNOME/gimp/-/issues/10373"
+    icon: "https://raw.githubusercontent.com/GNOME/gimp/de8f7fd4b8e8711d9167bbdd27bd089a39a863b0/icons/Default/scalable/gimp-wilber.svg"
+    parser: gitlab
+
   - name: Gimp News
     url:  "https://www.gimp.org/feeds/rss.xml"
+    displayUrl: "https://www.gimp.org/news/"
     icon: "https://raw.githubusercontent.com/GNOME/gimp/de8f7fd4b8e8711d9167bbdd27bd089a39a863b0/icons/Default/scalable/gimp-wilber.svg"
     parser: rss
-    insertValues:
-      - userPicture: "https://raw.githubusercontent.com/GNOME/gimp/de8f7fd4b8e8711d9167bbdd27bd089a39a863b0/icons/Default/scalable/gimp-wilber.svg"
 
   - name: Wait But Why
     url:  "https://waitbutwhy.com/feed"
+    displayUrl: "https://waitbutwhy.com"
     icon: "https://waitbutwhy.com/wp-content/uploads/2019/02/WBW-logo-vector-crop.jpg"
     parser: rss
     insertValues:
@@ -83,10 +99,96 @@ sites:
 
   - name: Phoronix
     url:  "https://www.phoronix.com/rss.php"
+    displayUrl: "https://www.phoronix.com"
     icon: "https://www.phoronix.com/android-chrome-192x192.png"
     parser: rss
     insertValues:
       - user: Michael Larabel
       - userPicture: "https://www.phoronix.com/assets/categories/michaellarabel.webp"
     filters:
-      - filter: wayland
+      - filter: (wayland|firefox|kernel|arch)
+
+  - name: Tiny Projects Blog
+    url:  "https://tinyprojects.dev/feed.xml"
+    displayUrl: "https://tinyprojects.dev/blog"
+    icon: "https://tinyprojects.dev/img/favicon/android-chrome-512x512.png"
+    parser: rss
+    insertValues:
+      - user: Ben Stokes
+      - userPicture: "https://future.com/wp-content/uploads/2022/06/headshot-2022-06-03-00.18.58-768x768.png"
+
+  - name: OpenStreetMap Blog
+    url:  "https://blog.openstreetmap.org/feed/"
+    displayUrl: "https://blog.openstreetmap.org"
+    icon: "https://upload.wikimedia.org/wikipedia/commons/b/b0/Openstreetmap_logo.svg"
+    parser: rss
+
+  - name: OpenRailwayMap Blog
+    url:  "https://blog.openrailwaymap.org/en.rss"
+    displayUrl: "https://blog.openrailwaymap.org"
+    icon: "https://raw.githubusercontent.com/OpenRailwayMap/OpenRailwayMap/970bf7e883da00fc5c65d640864fc22b6fe376b1/img/openrailwaymap.svg"
+    parser: rss
+
+  - name: Ultimate Hacking Keyboard Blog
+    url:  "https://ultimatehackingkeyboard.com/feed"
+    displayUrl: "https://ultimatehackingkeyboard.com/blog"
+    icon: "https://ultimatehackingkeyboard.com/wordpress/wp-content/uploads/2024/01/cropped-android-chrome-512x512-1-192x192.png"
+    parser: rss
+    insertValues:
+      - userPicture: "https://forum.ultimatehackingkeyboard.com/user_avatar/forum.ultimatehackingkeyboard.com/mlac/144/3_2.png"
+
+  - name: Keyboardio Blog
+    url:  "https://shop.keyboard.io/blogs/news.atom"
+    displayUrl: "https://shop.keyboard.io/blogs/news"
+    icon: "https://raw.githubusercontent.com/keyboardio/Kaleidoscope/master/docs/images/butterfly.png"
+    parser: atom
+
+  - name: Omtag Svensk Järnväg
+    url:  "https://omtagsvenskjarnvag.se/feed/"
+    displayUrl: "https://omtagsvenskjarnvag.se/nyheter-2/"
+    icon: "https://omtagsvenskjarnvag.se/wp-content/uploads/2023/09/cropped-faviconfav-192x192.png"
+    parser: rss
+
+  - name: Järnvägar.nu
+    url:  "https://jarnvagar.nu/feed/"
+    displayUrl: "https://jarnvagar.nu/arkiv/"
+    icon: "https://jarnvagar.nu/wp-content/uploads/2022/12/logo.png"
+    parser: rss
+
+  - name: Dagens Logistik - Infrastruktur
+    url:  "https://dagenslogistik.se/category/infrastruktur/feed/"
+    displayUrl: "https://dagenslogistik.se/category/infrastruktur/"
+    icon: "https://dagenslogistik.se/wp-content/uploads/2019/11/dagenslogistik_icon-300x300.png"
+    parser: rss
+
+  - name: Low←Tech Magazine
+    url:  "https://solar.lowtechmagazine.com/posts/index.xml"
+    displayUrl: "https://solar.lowtechmagazine.com/archives/"
+    icon: "https://yt3.googleusercontent.com/XWtt2xKXrOeeIxFqxv90Jpe9YZ0Hjct-j9IGeK6FoqrU3dcwLk4aMrQbOwbDOfo1hAdCIm_ZHQ"
+    parser: rss
+    insertValues:
+      - user: Kris De Decker
+      - userPicture: "https://i0.wp.com/joshuaspodek.com/wp-content/uploads/2022/12/KrisDeDecker.jpg"
+
+  - name: Reasons to be Cheerful
+    url:  "https://reasonstobecheerful.world/feed/"
+    displayUrl: "https://reasonstobecheerful.world/archives"
+    icon: "https://reasonstobecheerful.world/wp-content/uploads/2019/08/RTBC_Logo.svg"
+    parser: rss
+
+  - name: Stevan's notes
+    url: "https://stevana.github.io/rss.xml"
+    displayUrl: "https://stevana.github.io"
+    icon: "https://dfoto.se/v1/image/5809d73e8a2b8e678a496111/preview"
+    parser: rss
+    insertValues:
+      - user: Stevan
+      - userPicture: "https://dfoto.se/v1/image/5809d73e8a2b8e678a496111/preview"
+
+  - name: Wardruna
+    url:  "https://wardruna.com/news/"
+    icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
+    parser: wardruna
+    insertValues:
+      - user: Wardruna
+      - userPicture: "https://i.pinimg.com/originals/7e/36/e7/7e36e7d843fc8d095349a7aff6b4f770.jpg"
