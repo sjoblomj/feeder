@@ -18,7 +18,6 @@ BEGIN {
 
     Title     = ""
     Published = ""
-    Updated   = ""
     Item      = ""
     Items     = ""
 
@@ -28,18 +27,17 @@ BEGIN {
 {
     if ($0 ~ "<section class=\"main\"")
         Is_reading_article = 1
+    if (!Is_reading_article)
+        next
 
-    if ($0 ~ "<h3>" && Is_reading_article && !Is_reading_item) {
+    match($0, /<h3>(.*)&bull;(.*)<\/h3>/, a)
+    if (RSTART != 0 && !Is_reading_item) {
         Is_reading_item = 1
-        sub(/\t* *<h3>/, "", $0)
-        sub(/<\/h3>/, "", $0)
 
-        delim = "&bull;"
-        pos   = index($0, delim)
-        Title = trim(substr($0, 0, pos - 1))
-        pub   = trim(substr($0, pos + length(delim) + 1))
+        Title = trim(a[1])
+        pub   = trim(a[2])
         gsub(/"/, "\\\"", Title) # Escape quotes
-        gsub(/&ndash;/, "—", Title)
+        gsub(/&ndash;/,  "—", Title)
         gsub(/&aacute;/, "á", Title)
 
         split(pub, puba)
@@ -63,7 +61,7 @@ BEGIN {
         i = i "    \"id\": \"" Title "_" Published "\",\n"
         i = i "    \"title\": \"" Title "\",\n"
         i = i "    \"created\": \"" Published "\",\n"
-        i = i "    \"text\": \"" Item "\"\n"
+        i = i "    \"text\": \"" trim(Item) "\"\n"
         i = i "  }"
 
         Items = Items (Items == "" ? "" : ",\n") i
