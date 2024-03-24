@@ -23,7 +23,7 @@ for site in "${sites[@]}"; do
         data=$(./parsers/"$parser".sh "$url" "$filters" $maxelems)
     else
         echo "Unable to find parser '$parser'"
-        data=""
+        data="[]"
     fi
 
     if [[ "$insertValues" != "{}" ]]; then
