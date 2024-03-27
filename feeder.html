@@ -231,6 +231,13 @@
                 div.appendChild(imgDiv);
                 div.appendChild(h2);
                 siteDiv.appendChild(div);
+ 
+                if (siteData.description && siteData.description !== "null") {
+                    let desc = document.createElement("p");
+                    desc.className = "feedDescription";
+                    desc.appendChild(document.createTextNode(siteData.description));
+                    siteDiv.appendChild(desc);
+                }
             }
 
             Promise.all([

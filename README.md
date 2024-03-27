@@ -40,6 +40,7 @@ When specifying a website feed in `sites.yaml`, the following attributes are rec
 * `parser`: Required. Which parser to use.
 * `icon`: Optional. An icon to display next to the name of the site.
 * `displayUrl`: Optional. The name of the site will be clickable in the dashboard. If the `url` parameter is not suitable as link (e.g. if it leads to a RSS-feed file), then a URL to be used instead can be specified here.
+* `description`: Optional. A description of the site to be displayed in the dashboard.
 * `insertValues`: Optional. A list of hard-coded keys and values which will be inserted into each feed entry. Can be used e.g. if the author information or picture is missing.
 * `filters`: Optional. A list of search filters which must be present for the feed entry to be considered. The title and entry text is combined and searched. The filters can be specified as regex.
 

@@ -69,6 +69,11 @@ h1 {
     max-width: var(--icon-size);
 }
 
+.feedDescription {
+    font-style: italic;
+    text-align: center;
+}
+
 .feedElement {
     display: flex;
 }
