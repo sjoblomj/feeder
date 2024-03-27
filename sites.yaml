@@ -170,6 +170,21 @@ sites:
       - user: Kris De Decker
       - userPicture: "https://i0.wp.com/joshuaspodek.com/wp-content/uploads/2022/12/KrisDeDecker.jpg"
 
+  - name: Marginalia Blog
+    url:  "https://www.marginalia.nu/log/index.xml"
+    displayUrl: "https://www.marginalia.nu/log/"
+    icon: "https://search.marginalia.nu/favicon.ico"
+    parser: rss
+    insertValues:
+      - user: Viktor Löfgren
+      - userPicture: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRltBHX69SuFkRdbx0wvjw2_yo3zSP12ZY54kHPap-5cQ&s"
+
+  - name: Marginalia Publicity
+    url:  "https://search.marginalia.nu/news.xml"
+    displayUrl: "https://search.marginalia.nu/"
+    icon: "https://search.marginalia.nu/favicon.ico"
+    parser: rss
+
   - name: Reasons to be Cheerful
     url:  "https://reasonstobecheerful.world/feed/"
     displayUrl: "https://reasonstobecheerful.world/archives"
@@ -185,6 +200,26 @@ sites:
       - user: Stevan
       - userPicture: "https://dfoto.se/v1/image/5809d73e8a2b8e678a496111/preview"
 
+  - name: Fridays For Future
+    url:  "https://fridaysforfuture.org/feed/"
+    icon: "https://fridaysforfuture.org/wp-content/uploads/2020/03/cropped-FFF_logo_x960-2.webp"
+    displayUrl: "https://fridaysforfuture.org/"
+    parser: rss
+
+  - name: Fridays For Future Sweden
+    url:  "https://fridaysforfuture.se/feed/"
+    icon: "https://fridaysforfuture.org/wp-content/uploads/2020/03/cropped-FFF_logo_x960-2.webp"
+    displayUrl: "https://fridaysforfuture.se/nyheter/"
+    parser: rss
+
+  - name: Marduk
+    url:  "https://marduk.nu/feed/"
+    icon: "https://www.hell-is-open.de/gifs/bandlogos/marduk.jpg"
+    displayUrl: "https://marduk.nu/"
+    parser: rss
+    insertValues:
+      - userPicture: "https://marduk.nu/wp-content/themes/mardus/images/scroll-top.png"
+
   - name: Wardruna
     url:  "https://wardruna.com/news/"
     icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
@@ -192,3 +227,15 @@ sites:
     insertValues:
       - user: Wardruna
       - userPicture: "https://i.pinimg.com/originals/7e/36/e7/7e36e7d843fc8d095349a7aff6b4f770.jpg"
+
+  - name: ShadowFlare's Realm
+    url:  "https://sfsrealm.hopto.org/"
+    icon: "https://sfsrealm.hopto.org/favicon.ico"
+    parser: shadowflare
+    insertValues:
+      - userPicture: "https://sfsrealm.hopto.org/images/error126.jpg"
+
+  - name: Stormcoast-Fortress
+    url:  "http://www.stormcoast-fortress.net/"
+    icon: "https://static.freedownloadmanager.org/icon/32/1252/1252584.png"
+    parser: stormcoast-fortress
