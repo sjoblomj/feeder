@@ -20,14 +20,18 @@ else
 fi
 
 function perform_query() {
-    uri="$1"
-    command="$2"
-    curl -sL \
+    local uri="$1"
+    local cmd="$2"
+    local sitedata=$(curl --connect-timeout 10 -sL \
         -H "Accept: application/vnd.github.raw+json" \
         -H "X-GitHub-Api-Version: 2022-11-28" \
-        "$uri" |
-        jq "${command}" | \
-        jq '. | map(select(.event as $e | ["assigned", "labeled"] | index($e) | not))' | \
+        "$uri")
+    if [ -z "$sitedata" ]; then
+        sitedata="[]"
+    fi
+    echo "$sitedata" | \
+        jq "${cmd}" | \
+        jq '. | map(select(.event? as $e | ["assigned", "labeled"] | index($e) | not))' | \
         jq '. | map({"id": (.id // .source.issue.id // .sha), "text": (.body // .commit.message), "user": (.user.login // .actor.login // .author.name // .author.login), "userPicture": (.user.avatar_url // .actor.avatar_url // .author.avatar_url), "title": (.title // .source.issue.title // .milestone.title // .message // (if (.name != "") then .name else .tag_name end)), "url": (.html_url // .url // .source.issue.html_url), "event": .event, "pull_request": (if .source.issue.pull_request == null then null else {"url": .source.issue.pull_request.html_url, "merged": .source.issue.pull_request.merged_at} end), "state": .state, "created": (.created_at // .author.date // .commit.author.date), "updated": .updated_at})' | \
         jq '. | map({"id": .id, "text": (if (.event == "cross-referenced") or (.event == "committed") then "[" + .title + "](" + .url + ")" + (if .pull_request.merged != null then " (merged " + .pull_request.merged + ")" else "" end) else .text end), "user": .user, "userPicture": .userPicture, "title": (if (.title != null) and (.event == null) then .title else (if .event == "commented" then null else .event end) end), "url": .url, "created": .created, "updated": (if .created != .updated then .updated else null end)})' | \
         filter_and_shrink "$filter" "$maxelems" "$maxtextlen"

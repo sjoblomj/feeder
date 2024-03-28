@@ -7,7 +7,7 @@ filter="${2:-.*}"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-curl -sL "$url" | awk '
+curl --connect-timeout 10 -sL "$url" | awk '
 BEGIN {
     Debug = 0
 
