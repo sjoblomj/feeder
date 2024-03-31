@@ -215,6 +215,16 @@ sites:
     parser: rss
     description: Publicity news from the indie search engine Marginalia.
 
+  - name: Pine64 Community Blog
+    url:  "https://pine64.org/blog/index.xml"
+    displayUrl: "https://pine64.org/blog/"
+    icon: "https://upload.wikimedia.org/wikipedia/commons/1/18/Pine64_logo.svg"
+    parser: rss
+    description: News from open hardware maker Pine64
+    insertValues:
+      - user: pine64
+      - userPicture: "https://upload.wikimedia.org/wikipedia/commons/1/18/Pine64_logo.svg"
+
   - name: Reasons to be Cheerful
     url:  "https://reasonstobecheerful.world/feed/"
     displayUrl: "https://reasonstobecheerful.world/archives"
