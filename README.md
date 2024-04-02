@@ -8,6 +8,8 @@ The feeds of the websites that the user finds interesting can be specified in `s
 
 Simply update `sites.yaml` with the websites and data you find interesting. To scrape, run the `scrape.sh` script, and then open `feeder.html` in your browser.
 
+In order to not have git bug you about `sites.yaml` being changed, you can run `git update-index --assume-unchanged sites.yaml`. To have git track the file again, run `git update-index --no-assume-unchanged sites.yaml`.
+
 ## Dashboard usage
 
 In the dashboard, one can mark entries as "seen". By doing so, one can visually keep track of which items have been read, and any new items will be clearly visible.
@@ -30,6 +32,8 @@ There are a number of parsers that are supported:
 * gitlab - Parser for GitLab issues
 * youtrack - Parser for issues on YouTrack
 * wardruna - Custom parser for the site wardruna.com
+* shadowflare - Custom parser for the site sfsrealm.hopto.org
+* stormcoast-fortress - Custom parser for the site stormcoast-fortress.net
 
 ## Yaml configuration
 

@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.7.1] - 2024-04-02
+
+### Added
+
+- .gitignore file
+
+### Changed
+
+- Slimming down sites.yaml, so that it is more useful as an example.
+- The readme now mentions the site-specific parsers for ShadowFlare and Stormcoast-Fortress.
+
+
+
 ## [1.7] - 2024-03-29
 
 ### Changed
