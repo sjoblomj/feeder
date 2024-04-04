@@ -110,7 +110,7 @@
                 eyeDiv.style = "display: none";
                 eyeDiv.title = mouseOverText;
                 let img;
-                if (pictureUrl) {
+                if (pictureUrl && pictureUrl !== "null") {
                     img = document.createElement("img");
                     img.src = pictureUrl;
                     img.className = "";
@@ -126,7 +126,7 @@
                     let txtColour = getContrastedColour(bgColour);
 
                     img = document.createElement("div");
-                    img.className = "fallbackIcon ";
+                    img.className = "fallbackIcon feedElementAuthorIcon ";
                     img.style.backgroundColor = bgColour;
                     img.style.color = txtColour;
                     img.appendChild(document.createTextNode(initials));
@@ -220,7 +220,7 @@
                     let entries = document.getElementsByName(siteData.name);
                     entries.forEach(ent => ent.className = "feedElement read");
                 }
-                handleIcons(imgDiv, markAllAsReadText, siteData.icon, "Site", "", eyeDivOnclick);
+                handleIcons(imgDiv, markAllAsReadText, siteData.icon, siteData.name, "", eyeDivOnclick);
 
                 let a = document.createElement("a");
                 a.href = siteData.url;
