@@ -28,7 +28,7 @@ There are a number of parsers that are supported:
 
 * rss - Parser for the very common RSS feed format, used all over the Internet.
 * atom - Parser for the very common Atom feed format, used all over the Internet.
-* github - Can parse GitHub issues and PRs, new releases and new commits to a repository.
+* github - Can parse GitHub issues and PRs, new releases and new commits to a repository. The GitHub API has a rate limit of 60 requests per hour. If set, the parser will read the `GITHUB_ACCESS_TOKEN` environment variable and use in the requests. So if you need more than 60 requests per hour, create a [GitHub Access Token](https://docs.github.com/en/authentication/keeping-your-account-and-data-secure/managing-your-personal-access-tokens) and specify it in the environment `GITHUB_ACCESS_TOKEN`, whereupon GitHub will increase the rate limit to 5000 requests per hour.
 * gitlab - Parser for GitLab issues
 * youtrack - Parser for issues on YouTrack
 * wardruna - Custom parser for the site wardruna.com

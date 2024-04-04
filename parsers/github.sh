@@ -22,10 +22,19 @@ fi
 function perform_query() {
     local uri="$1"
     local cmd="$2"
-    local sitedata=$(curl --connect-timeout 10 -sL \
-        -H "Accept: application/vnd.github.raw+json" \
-        -H "X-GitHub-Api-Version: 2022-11-28" \
-        "$uri")
+    local sitedata="[]"
+    if [ -z "$GITHUB_ACCESS_TOKEN" ]; then
+        sitedata=$(curl --connect-timeout 10 -sL \
+            -H "Accept: application/vnd.github.raw+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "$uri")
+    else
+        sitedata=$(curl --connect-timeout 10 -sL \
+            -H "Authorization: Bearer $GITHUB_ACCESS_TOKEN" \
+            -H "Accept: application/vnd.github.raw+json" \
+            -H "X-GitHub-Api-Version: 2022-11-28" \
+            "$uri")
+    fi
     if [ -z "$sitedata" ]; then
         sitedata="[]"
     fi
@@ -37,7 +46,7 @@ function perform_query() {
         filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 }
 
-if (echo "$url" | grep -Eq  ^.*/issues/[0-9]+/?$); then
+if (echo "$url" | grep -Eq ^.*/issues/[0-9]+/?$); then
     base=$(perform_query "$url" "[.]")
     tl=$(perform_query "$url/timeline" ".")
     jq --argjson arr1 "$base" --argjson arr2 "$tl" -n '$arr1 + $arr2 | sort_by(.created) | reverse'
