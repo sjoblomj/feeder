@@ -58,6 +58,7 @@ h1 {
     display: inline-block;
     vertical-align: middle;
     padding-right: 1em;
+    width: var(--icon-size);
 }
 .feedHeader h2 {
     display: inline-block;
@@ -121,6 +122,18 @@ h1 {
     width: var(--icon-size);
     font-size: small;
     overflow: hidden;
+    position: relative;
+    margin-top: 1ex;
+}
+
+.feedElementImg {
+    min-height: var(--icon-size);
+}
+.feedHeaderImg  .eye {
+    margin: 1ex;
+}
+.feedElementImg .eye {
+    top: 1ex;
 }
 
 .fallbackIcon {
@@ -130,8 +143,9 @@ h1 {
 }
 
 .eye {
+    position: relative;
+    margin-left: 1ex;
     cursor: pointer;
-    margin: 1ex;
     width:  calc(var(--icon-size) * 0.66);
     height: calc(var(--icon-size) * 0.66);
     border: solid 2px var(--eye-colour);
