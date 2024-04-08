@@ -3,6 +3,20 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.8] - 2024-04-08
+
+### Added
+
+- Logo for the project (AI generated from the Playground-v2.5 model at poe.com).
+- Support for specifying a GitHub access token in the `GITHUB_ACCESS_TOKEN` environment variable. By providing an access token, the GitHub rate limit of 60 requests per hour instead becomes 5000 requests per hour.
+
+### Changed
+
+- Sites without an icon will now be handled properly.
+- Minor stylistic changes: When hovering over icons, the author text no longer makes a tiny jump.
+
+
+
 ## [1.7.1] - 2024-04-02
 
 ### Added

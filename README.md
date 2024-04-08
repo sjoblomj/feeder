@@ -1,5 +1,7 @@
 # Feeder
 
+![Feeder](feeder.png)
+
 A set of scripts to parse websites for updates which are displayed in a dashboard-fashion.
 
 The feeds of the websites that the user finds interesting can be specified in `sites.yaml`. The given sites are scraped by the given parser for updates. After all sites are scraped, a json-file is produced with all aggregated data. The `feeder.html` will display a dashboard in HTML of the results.
