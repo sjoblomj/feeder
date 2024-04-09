@@ -29,9 +29,9 @@ sitedata=$(curl --connect-timeout 10 -s "${url}/activitiesPage?categories=Commen
 if [ -z "$sitedata" ]; then
     sitedata="{}"
 fi
-comments=$(echo "$sitedata"  | \
-    jq '.activities? // []'  | \
-    jq 'map(.added.[])'      | \
+comments=$(echo "$sitedata" | \
+    jq '.activities? // []' | \
+    jq 'map(.added[])'      | \
     jq 'map({"id": .id, "user": .author.name, "userPicture": .author.avatarUrl, "text": .text, "created": (if .created == null then null else .created / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "updated": (if .updated == null then null else .updated / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "title": null})' | \
     filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 )
