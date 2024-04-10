@@ -12,6 +12,7 @@
         <div id="save">Save</div>
 
         <script type="text/javascript">
+            const feederText = "Feeder";
             const updatedText = "Sites with updates";
             const notUpdatedText = "Sites without updates";
             const markAsReadText = "Mark entry as read";
@@ -19,6 +20,7 @@
             const defaultTitleText = "Comment";
             const createdTimestampText = "Created";
             const updatedTimestampText = "Updated";
+            const noSiteDataErrorText = "Could not read file 'sitedata.json'. Please run './scrape.sh' to have it created.";
 
             let seenEntries = [];
             let hasUnsaved = false;
@@ -242,9 +244,19 @@
             }
 
             Promise.all([
-                fetch("sitedata.json").then(res => res.json()),
-                fetch("seenentries.json").then(res => res.json())
+                fetch("sitedata.json")   .then(res => { if (res.ok) return res.json(); else return []; }),
+                fetch("seenentries.json").then(res => { if (res.ok) return res.json(); else return []; })
             ]).then(([sites, seenEntriesJson]) => {
+                if (sites.length == 0) {
+                    let root = document.getElementById("contentWithUpdates");
+                    let h1 = document.createElement("h1");
+                    h1.appendChild(document.createTextNode(feederText));
+                    document.body.insertBefore(h1, root);
+
+                    let p = document.createElement("p");
+                    p.appendChild(document.createTextNode(noSiteDataErrorText));
+                    document.body.insertBefore(p, root);
+                }
                 seenEntries = seenEntriesJson;
 
                 sites.forEach(site => {

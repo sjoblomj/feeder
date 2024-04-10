@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.9] - 2024-04-10
+
+### Added
+
+- Dashboard will now gracefully handle the absense of the scraper-generated sitedata.json file and the dashboard-generated seenentries.json. When no sitedata.json file is present, a user-friendly message will be shown instead of a blank page as before.
+
+### Changed
+
+- Minor change of jq syntax in parsers, so the required jq version is now 1.6 instead of 1.7 as before.
+
+
+
 ## [1.8] - 2024-04-08
 
 ### Added
