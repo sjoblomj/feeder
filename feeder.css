@@ -93,10 +93,15 @@ h1 {
     padding: 2px 0 0 1ex;
 }
 
+.feedElementBody {
+    max-width: calc(100% - var(--icon-size) - 2ex);
+}
+
 .feedElementText {
     padding: 1ex;
     min-height: calc(var(--icon-size) - 1em);
     overflow: hidden;
+    text-align: justify;
 }
 
 .feedElementText img {
@@ -106,6 +111,10 @@ h1 {
 
 .feedElementText h1 {
     font-size: x-large;
+}
+
+.feedElementText pre {
+    overflow: scroll;
 }
 
 .feedElementAuthor {
