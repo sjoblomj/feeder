@@ -22,7 +22,7 @@ if [ -z "$sitedata" ]; then
     sitedata="[]"
 fi
 comments=$(echo "$sitedata" | \
-    jq '[.[].notes[]] | map({"id": .id, "user": (.author.name // .assignees[0].name), "userPicture": (.author.avatar_url // .assignees[0].avatar_url), "text": (.note // .description), "title": (if .system == true then "System entry" else null end), "created": .created_at, "updated": (if .created_at != .updated_at then .updated_at else null end)})' | \
+    jq '[.[].notes[]] | map({"id": .id, "user": (.author.name // .assignees[0].name), "userPicture": (.author.avatar_url // .assignees[0].avatar_url), "text": (.note // .description), "title": (if .system == true then "System entry" else "Comment" end), "created": .created_at, "updated": (if .created_at != .updated_at then .updated_at else null end)})' | \
     filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 )
 

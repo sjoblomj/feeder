@@ -3,6 +3,15 @@
 All notable changes to this project will be documented in this file.
 
 
+## [1.10] - 2024-04-14
+
+### Changed
+
+- Better title defaults.
+- Fix to Dashboard to prevent sites from overflowing its content.
+
+
+
 ## [1.9] - 2024-04-10
 
 ### Added
