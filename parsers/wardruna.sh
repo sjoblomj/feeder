@@ -3,7 +3,7 @@ currdir="$(dirname "$0")"
 source "$currdir/_common.sh"
 
 url="$1"
-filter="${2:-.*}"
+filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 

@@ -51,7 +51,7 @@ When specifying a website feed in `sites.yaml`, the following attributes are rec
 * `filters`: Optional. A list of search filters which must be present for the feed entry to be considered. The title and entry text is combined and searched. The filters can be specified as regex.
 
 
-Below is example configuration for the website Phoronix. Since the `url` attribute points to an RSS-feed, the `displayUrl` attribute is given as well, so that the dashboard has a link to the main site. Since (almost) all articles are written by the same author and that information is not encoded into the RSS-feed, the name and picture of the author is specified through the `insertValues`. Finally, there is a filter which specifies that only articles containing "wayland" or "arch" will be shown.
+Below is example configuration for the website Phoronix. Since the `url` attribute points to an RSS-feed, the `displayUrl` attribute is given as well, so that the dashboard has a link to the main site. Since (almost) all articles are written by the same author and that information is not encoded into the RSS-feed, the name and picture of the author is specified through the `insertValues`. Finally, there is a filter which specifies that the only articles to keep are those where the text or title contains "wayland" or "arch".
 
 ```
   - name: Phoronix
@@ -66,6 +66,54 @@ Below is example configuration for the website Phoronix. Since the `url` attribu
       - filter: (wayland|arch)
 ```
 
+## Filters
+
+Filters can be used to remove articles from the list. The title and text of the articles will be searched.
+
+### Simple case
+
+The simplest case is to just give a keyword that must exist in the title or text of the article.
+
+In the following example, only articles containing "firefox" will be kept:
+
+```
+filters:
+  - filter: firefox
+```
+
+### Regular expressions
+
+Filters support [regular expressions](https://en.wikipedia.org/wiki/Regular_expression). This allows to create powerful matching criteria.
+
+In the following example, only articles containing "wayland" or "arch" will be kept:
+
+```
+filters:
+  - filter: (wayland|arch)
+```
+
+### Boolean logic
+
+Filters also support boolean logic, i.e. `and`, `or` and `not`. A filter consists of an arbitrary number of sections, each one level more nested than the previous. Each section must contain at most one `filter` key, and the rest of the keys on that section should be `and` or `or`.
+
+In the following exmple, only articles containing "wayland" or "firefox" or "arch" will be kept. However, if it does contain "arch", it must not contain "march", "architect" or "research".
+
+```
+filters:
+  - filter: wayland
+  - or:
+    - filter: firefox
+  - or:
+    - filter: arch
+    - and:
+      - not:
+        - filter: march
+        - or:
+          - filter: architect
+        - or:
+          - filter: research
+```
+
 ## Requirements
 
 The scripts make use of the following programs:
@@ -73,3 +121,4 @@ The scripts make use of the following programs:
 * [curl](https://curl.se)
 * [jq](https://github.com/jqlang/jq)
 * [yq](https://github.com/mikefarah/yq)
+* perl

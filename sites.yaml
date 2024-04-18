@@ -55,7 +55,20 @@ sites:
       - user: Michael Larabel
       - userPicture: "https://www.phoronix.com/assets/categories/michaellarabel.webp"
     filters:
-      - filter: (wayland|firefox|kernel|arch)
+      - filter: wayland
+      - or:
+        - filter: gimp
+      - or:
+        - filter: firefox
+      - or:
+        - filter: arch
+        - and:
+          - not:
+            - filter: march
+            - or:
+              - filter: architect
+            - or:
+              - filter: research
 
   - name: Keyboardio Blog
     url:  "https://shop.keyboard.io/blogs/news.atom"

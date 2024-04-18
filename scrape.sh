@@ -2,17 +2,32 @@
 output="";
 maxelems=15;
 
+function json_filters_to_jq_tests() {
+    local filters=$(echo "$1" | \
+        perl -pe 's/,//g, s/[\[{]/(/g, s/[}\]]/)/g'  | # Remove commas and replace brackets with parenthesis
+        perl -pe '1 while s/"not":(\(([^()]++|(?1))*\))/ ($1) | not/g' | # Repeatedly turn '"not":(.*)' into '(.*) | not'
+        perl -pe 's/"filter":"([^"]*)"/test("\1")/g' | # Replace '"filter":".*"' with 'test(".*")'
+        perl -pe 's/(\()?"(or|and)":/ \2 \1/g'         # Put 'or' and 'and' outside their parenthesis
+    )
+    if [[ "$filters" == "()" ]]; then
+        filters=""
+    fi
+    echo "$filters"
+}
+
 readarray sites < <(yq e -o=j -I=0 '.sites[]' sites.yaml )
 
 for site in "${sites[@]}"; do
-    name=$(   echo "$site" | yq e '.name'   -)
-    icon=$(   echo "$site" | yq e '.icon'   -)
-    url=$(    echo "$site" | yq e '.url'    -)
-    parser=$( echo "$site" | yq e '.parser' -)
-    filters=$(echo "$site" | yq e '.filters.[]' - | jq -r 'add? // {}')
-    insertValues=$(echo "$site" | yq e '.insertValues' - | jq 'add? // {}')
+    name=$(   echo "$site" | yq e '.name'    -)
+    icon=$(   echo "$site" | yq e '.icon'    -)
+    url=$(    echo "$site" | yq e '.url'     -)
+    parser=$( echo "$site" | yq e '.parser'  -)
+    filters=$(echo "$site" | yq e '.filters' -           | jq -rc 'add? // {}')
+    insertValues=$(echo "$site" | yq e '.insertValues' - | jq     'add? // {}')
     displayUrl=$(  echo "$site" | yq e '.displayUrl'   -)
     description=$( echo "$site" | yq e '.description'  -)
+
+    filters=$(json_filters_to_jq_tests "$filters")
 
     if [[ "$displayUrl" == "null" ]]; then
         displayUrl="$url"
