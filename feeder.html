@@ -202,7 +202,7 @@
                 dates.appendChild(document.createTextNode(" — " + createdTimestampText + ": " + created + (updated ? ", " + updatedTimestampText + ": " + updated : "")));
                 title.appendChild(a);
                 title.appendChild(dates);
-                text.insertAdjacentHTML("afterbegin", data.text);
+                text.insertAdjacentHTML("afterbegin", data.text ? data.text : "");
 
                 body.appendChild(title);
                 body.appendChild(text);
