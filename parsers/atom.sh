@@ -13,6 +13,6 @@ if [ -z "$sitedata" ]; then
 else
   echo "$sitedata" | \
     yq -p=xml -o=json | \
-    jq '.feed.entry | map({"id": .id, "title": .title, "url": .link["+@href"], "text": .content["+content"], "user": .author.name, "created": .published, "updated": .updated})' | \
+    jq '.feed.entry | map({"id": .id, "title": .title, "url": .link["+@href"], "text": (.content["+content"] // .group.description), "user": .author.name, "created": .published, "updated": .updated})' | \
     filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 fi
