@@ -15,17 +15,17 @@ else
     exit 1
 fi
 
-sitedata=$(curl --connect-timeout 10 -s "${url}?%24top=-1&fields=description,id,usesMarkdown,created,updated,summary,reporter(%40user),updater(%40user)%3B%40user%3AfullName,avatarUrl" --compressed -H "Accept: application/json")
+sitedata=$(curl --connect-timeout 10 -s "${url}?%24top=-1&fields=wikifiedDescription,id,created,updated,summary,reporter(%40user),updater(%40user)%3B%40user%3AfullName,avatarUrl" --compressed -H "Accept: application/json")
 if [ -z "$sitedata" ]; then
     sitedata="{}"
 fi
 base=$(echo "$sitedata" | \
-    jq '{"id": .id, "title": .summary, "text": .description, "created": (if .created == null then null else .created / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "updated": (if .updated == null then null else .updated / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "user": .reporter.fullName, "userPicture": .reporter.avatarUrl}' | \
+    jq '{"id": .id, "title": .summary, "text": .wikifiedDescription, "created": (if .created == null then null else .created / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "updated": (if .updated == null then null else .updated / 1000 | strftime("%Y-%m-%dT%H:%M:%SZ") end), "user": .reporter.fullName, "userPicture": .reporter.avatarUrl}' | \
     jq '[.]' | \
     filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 )
 
-sitedata=$(curl --connect-timeout 10 -s "${url}/activitiesPage?categories=CommentsCategory&reverse=true&fields=activities(added(author(name,avatarUrl),id,updated,created,text,usesMarkdown,files),timestamp)" -H "Accept: application/json")
+sitedata=$(curl --connect-timeout 10 -s "${url}/activitiesPage?categories=CommentsCategory&reverse=true&fields=activities(added(author(name,avatarUrl),id,updated,created,text),timestamp)" -H "Accept: application/json")
 if [ -z "$sitedata" ]; then
     sitedata="{}"
 fi
