@@ -3,7 +3,8 @@ output="";
 maxelems=15;
 
 function json_filters_to_jq_tests() {
-    local filters=$(echo "$1" | \
+    local filters
+    filters=$(echo "$1" | \
         perl -pe 's/,//g, s/[\[{]/(/g, s/[}\]]/)/g'  | # Remove commas and replace brackets with parenthesis
         perl -pe '1 while s/"not":(\(([^()]++|(?1))*\))/ ($1) | not/g' | # Repeatedly turn '"not":(.*)' into '(.*) | not'
         perl -pe 's/"filter":"([^"]*)"/test("\1")/g' | # Replace '"filter":".*"' with 'test(".*")'
