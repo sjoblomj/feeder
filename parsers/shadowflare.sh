@@ -7,15 +7,11 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-curl --connect-timeout 10 -sL "$url" | tr '\r' '\n' | awk '
+curl --connect-timeout 10 -sL "$url" | tr '\r' '\n' | tr "'" "\"" | awk -i "parsers/_common.awk" '
 BEGIN {
     Debug = 0
 
-    Base_url = "https://sfsrealm.hopto.org/"
-    split("January February March April May June July August September October November December", month)
-    for (i in month) {
-        month_nums[month[i]] = i
-    }
+    Base_url  = "https://sfsrealm.hopto.org/"
 
     Title     = ""
     Date      = ""
@@ -37,10 +33,8 @@ BEGIN {
         Date = a[1]
         split(Date, a)
         sub(/,/, "", a[3])
-        m = int(month_nums[a[2]])
-        if (m < 10)
-            m = "0" m
-        Date = a[4] "-" m "-" a[3]
+
+        Date = make_iso_date(a[4], a[2], a[3])
         if (Debug) print "Date: " Date > "/dev/stderr"
     }
 
@@ -55,27 +49,18 @@ BEGIN {
     if (RSTART != 0) {
         $0 = ""
         Author = a[1]
-        Published = Date "T" a[2] ":00Z"
+        split(a[2], a, ":")
+        Published = combine_date_and_time(Date, a[1], a[2], "00", "000")
         if (Debug) print "Author: " Author ", Published: " Published > "/dev/stderr"
     }
 
     match($0, /^<FONT COLOR="#FFEEDD" SIZE="2" FACE="arial">(.+)/, a)
     if (RSTART != 0) {
-        text = trim(a[1])
-        gsub(/\\/, "\\\\", text)
-        gsub(/"/,  "\\\"", text)
-        gsub(/\t/, "    ", text)
+        text = a[1]
 
-        i = "  {\n"
-        i = i "    \"id\": \"" Url "\",\n"
-        i = i "    \"title\": \"" Title "\",\n"
-        i = i "    \"user\": \"" Author "\",\n"
-        i = i "    \"url\": \"" Base_url "#" Url "\",\n"
-        i = i "    \"created\": \"" Published "\",\n"
-        i = i "    \"text\": \"" text "\"\n"
-        i = i "  }"
+        text = make_item(text, Url, Title, Author, Base_url "#" Url, Published)
 
-        Items     = Items (Items == "" ? "" : ",\n") i
+        Items     = Items (Items == "" ? "" : ",\n") text
         Title     = ""
         Author    = ""
         Url       = ""
@@ -85,10 +70,4 @@ BEGIN {
 END {
     print "[\n" Items "\n]"
 }
-
-# Trims away any whitespace (i.e. space, tab, newlines, carrige-returns) from the left and right of given [string]
-function trim(string) {
-    sub(/^[ \t\r\n]+/,  "", string)
-    sub( /[ \t\r\n]+$/, "", string)
-    return string
-}' | filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
+' | filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
