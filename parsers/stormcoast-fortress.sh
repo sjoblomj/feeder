@@ -7,7 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-curl --connect-timeout 10 -sL "$url" | tr '\r' '\n' | tr "'", "\"" | awk '
+curl --connect-timeout 10 -sL "$url" | tr '\r' '\n' | tr "'" "\"" | awk -i "parsers/_common.awk" '
 BEGIN {
     Debug = 0
 
@@ -46,14 +46,11 @@ BEGIN {
     match($0, /<td><div class=.fancytop.>&nbsp;Posted: (.*)<\/div><\/td>/, a)
     if (RSTART != 0) {
         Published = a[1]
-        split(Published, b)
-        split(b[1], c, "-")
-        if (length(c[1]) == 1)
-            c[1] = "0" c[1]
-        if (length(c[2]) == 1)
-            c[2] = "0" c[2]
+        split(Published, a)
+        split(a[1], d, "-")
+        split(a[2], t, ":")
 
-        Published = c[3] "-" c[2] "-" c[1] "T" b[2] "Z"
+        Published = make_iso_datetime(d[3], d[2], d[1], t[1], t[2], t[3], "000")
         if (Debug) print "Published: " Published > "/dev/stderr"
     }
 
@@ -73,23 +70,11 @@ BEGIN {
     match($0, /(.*)<BR><br><\/div>/, a)
     if (RSTART != 0) {
         Is_reading_item = 0
-        Item = trim(Item "\n" a[1])
+        Item = Item "\n" a[1]
 
-        gsub(/\\/, "\\\\", Item)
-        gsub(/"/,  "\\\"", Item)
-        gsub(/\n/, "\\n", Item)
-        Item = remove_non_ascii(Item)
+        Item = make_item(Item, Url, Title, Author, Base_url "#" Url, Published)
 
-        i = "  {\n"
-        i = i "    \"id\": \"" Url "\",\n"
-        i = i "    \"title\": \"" Title "\",\n"
-        i = i "    \"user\": \"" Author "\",\n"
-        i = i "    \"url\": \"" Base_url "#" Url "\",\n"
-        i = i "    \"created\": \"" Published "\",\n"
-        i = i "    \"text\": \"" Item "\"\n"
-        i = i "  }"
-
-        Items     = Items (Items == "" ? "" : ",\n") i
+        Items     = Items (Items == "" ? "" : ",\n") Item
         Item      = ""
         Title     = ""
         Author    = ""
@@ -104,15 +89,4 @@ BEGIN {
 END {
     print "[\n" Items "\n]"
 }
-
-function remove_non_ascii(text) {
-    gsub(/[^a-zA-Z0-9 "\.,!#\*<>()%_=:\-\\\/]/, "", text)
-    return text
-}
-
-# Trims away any whitespace (i.e. space, tab, newlines, carrige-returns) from the left and right of given [string]
-function trim(string) {
-    sub(/^[ \t\r\n]+/,  "", string)
-    sub( /[ \t\r\n]+$/, "", string)
-    return string
-}' | filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
+' | filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
