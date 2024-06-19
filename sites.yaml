@@ -48,7 +48,7 @@ sites:
   - name: Phoronix
     url:  "https://www.phoronix.com/rss.php"
     displayUrl: "https://www.phoronix.com"
-    icon: "https://www.phoronix.com/android-chrome-192x192.png"
+    icon: "https://icons.iconarchive.com/icons/papirus-team/papirus-apps/512/phoronix-test-suite-icon.png"
     parser: rss
     description: Technology website with Linux and open source news.
     insertValues:
