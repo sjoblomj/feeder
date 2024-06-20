@@ -96,6 +96,6 @@ sites:
 
   - name: Stormcoast-Fortress
     url:  "http://www.stormcoast-fortress.net/"
-    icon: "https://static.freedownloadmanager.org/icon/32/1252/1252584.png"
+    icon: "https://wsrv.nl/?url=stormcoast-fortress.net/img/icon.gif"
     parser: stormcoast-fortress
     description: Primarily contains releases for SCMDraft, a map maker for StarCraft.
