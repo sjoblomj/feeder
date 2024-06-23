@@ -94,6 +94,12 @@ sites:
     insertValues:
       - userPicture: "https://loopchicago.com/assets/Tourism-Operators/images/Wardruna__FillWzEyMDAsMTIwMF0.jpg"
 
+  - name: Return To The Roots News
+    url:  "https://www.siedler25.org/index.php"
+    icon: "https://avatars.githubusercontent.com/u/2520313"
+    parser: siedler25
+    description: News from the Settlers II clone RTTR.
+
   - name: Staredit Network
     url:  "http://www.staredit.net"
     icon: "https://wsrv.nl/?url=staredit.net/wiki/resources/assets/senglobe.png"
