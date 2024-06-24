@@ -77,6 +77,14 @@ sites:
     parser: atom
     description: News from keyboard maker Keyboardio.
 
+  - name: Planet Wild Blog
+    url:  "https://planetwild.com/blog"
+    icon: "https://cdn.prod.website-files.com/665f17d0fb4bfc1e811460d0/66a8b28199611411c83fbd2b_logo-medium.svg"
+    parser: planetwild
+    description: Blog of Planet Wild, aiming to restore ecosystems.
+    insertValues:
+      - userPicture: "https://cdn.prod.website-files.com/665f17d0fb4bfc1e811460d0/66a8b28199611411c83fbd2b_logo-medium.svg"
+
   - name: Wardruna
     url:  "https://wardruna.com/news/"
     icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
