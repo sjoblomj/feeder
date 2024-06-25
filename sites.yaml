@@ -85,6 +85,14 @@ sites:
     insertValues:
       - userPicture: "https://cdn.prod.website-files.com/665f17d0fb4bfc1e811460d0/66a8b28199611411c83fbd2b_logo-medium.svg"
 
+  - name: Götheborg of Sweden news
+    url:  "https://www.gotheborg.se/nyheter/"
+    icon: "https://www.gotheborg.se/media/jzzanukn/favicon.png"
+    parser: gotheborg
+    description: News from the east india trade vessel replica Götheborg
+    insertValues:
+      - userPicture: "https://www.gotheborg.se/media/jzzanukn/favicon.png"
+
   - name: Wardruna
     url:  "https://wardruna.com/news/"
     icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
