@@ -93,6 +93,15 @@ sites:
     insertValues:
       - userPicture: "https://www.gotheborg.se/media/jzzanukn/favicon.png"
 
+  - name: Draken Harald Hårfagre news
+    url:  "https://www.drakenhh.com/news"
+    icon: "https://images.squarespace-cdn.com/content/v1/5957f58ebe6594dbcffacf91/1510661138870-2J152MO68AOLSWBD0GV8/favicon.ico"
+    parser: drakenhh
+    description: News from the viking ship Draken Harald Hårfagre
+    insertValues:
+      - user: Draken Harald Hårfagre
+      - userPicture: "https://images.squarespace-cdn.com/content/v1/5957f58ebe6594dbcffacf91/1510661138870-2J152MO68AOLSWBD0GV8/favicon.ico"
+
   - name: Wardruna
     url:  "https://wardruna.com/news/"
     icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
