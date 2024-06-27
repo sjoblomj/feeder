@@ -102,6 +102,14 @@ sites:
       - user: Draken Harald Hårfagre
       - userPicture: "https://images.squarespace-cdn.com/content/v1/5957f58ebe6594dbcffacf91/1510661138870-2J152MO68AOLSWBD0GV8/favicon.ico"
 
+  - name: Saga Farmann Press releases
+    url:  "https://www.sagafarmann.com/pressarchive"
+    icon: "https://www.sagafarmann.com/_next/image?url=%2FSaga_Med_org_page-0001-removebg-preview.png&w=64&q=100"
+    parser: sagafarmann
+    description: News from the viking ship Saga Farmann
+    insertValues:
+      - userPicture: "https://www.sagafarmann.com/_next/image?url=%2FSaga_Med_org_page-0001-removebg-preview.png&w=64&q=100"
+
   - name: Wardruna
     url:  "https://wardruna.com/news/"
     icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
