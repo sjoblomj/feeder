@@ -1,4 +1,4 @@
-#!bin/bash
+#!/bin/bash
 
 function filter_and_shrink() {
     text=<&0
