@@ -12,7 +12,7 @@ if [[ $url =~ ^https://(api\.|www\.)?github.com/(repos/)?([^/]+)/([^/]+)/(.*)$ ]
     url="https://api.github.com/repos/$rep"
     url=$(echo $url | sed "s|/$||")
     if [[ $url =~ ^.*/pull/[0-9]+$ ]]; then
-        url=$(echo $url | sed -r "s|pull/([0-9]+)|issues/\1|")
+        url=$(echo "$url" | sed -r "s|pull/([0-9]+)|issues/\1|")
     fi
 else
     echo "Could not understand URL '$url'"
@@ -22,23 +22,8 @@ fi
 function perform_query() {
     local uri="$1"
     local cmd="$2"
-    local sitedata="[]"
-    if [ -z "$GITHUB_ACCESS_TOKEN" ]; then
-        sitedata=$(curl --connect-timeout 10 -sL \
-            -H "Accept: application/vnd.github.raw+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "$uri")
-    else
-        sitedata=$(curl --connect-timeout 10 -sL \
-            -H "Authorization: Bearer $GITHUB_ACCESS_TOKEN" \
-            -H "Accept: application/vnd.github.raw+json" \
-            -H "X-GitHub-Api-Version: 2022-11-28" \
-            "$uri")
-    fi
-    if [ -z "$sitedata" ]; then
-        sitedata="[]"
-    fi
-    echo "$sitedata" | \
+    local authorization="${GITHUB_ACCESS_TOKEN:+Authorization: Bearer $GITHUB_ACCESS_TOKEN}" # Empty if GITHUB_ACCESS_TOKEN is unset
+    get_json "$uri" "[]" "Accept: application/vnd.github.raw+json" "X-GitHub-Api-Version: 2022-11-28" "$authorization" | \
         jq "${cmd}" | \
         jq '. | map(select(.event? as $e | ["assigned", "labeled"] | index($e) | not))' | \
         jq '. | map({"id": (.id // .source.issue.id // .sha), "text": (.body // .commit.message), "user": (.user.login // .actor.login // .author.name // .author.login), "userPicture": (.user.avatar_url // .actor.avatar_url // .author.avatar_url), "title": (.title // .source.issue.title // .milestone.title // .message // (if (.name != null and .name != "") then .name elif (.commit) then "Committed" else .tag_name end)), "url": (.html_url // .url // .source.issue.html_url), "event": .event, "pull_request": (if .source.issue.pull_request == null then null else {"url": .source.issue.pull_request.html_url, "merged": .source.issue.pull_request.merged_at} end), "state": .state, "created": (.created_at // .author.date // .commit.author.date // .submitted_at), "updated": .updated_at})' | \

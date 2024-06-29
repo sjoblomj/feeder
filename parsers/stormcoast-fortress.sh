@@ -7,7 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-curl --connect-timeout 10 -sL "$url" | tr '\r' '\n' | tr "'" "\"" | awk -i "parsers/_common.awk" '
+download_data "$url" | tr '\r' '\n' | tr "'" "\"" | awk -i "parsers/_common.awk" '
 BEGIN {
     Debug = 0
 
