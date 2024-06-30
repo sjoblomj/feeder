@@ -7,8 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-get_xml "$url" |
-  yq --xml-skip-directives --xml-skip-proc-inst --xml-raw-token=false -p xml -o json '. // {}' |
+get_xml_as_json "$url" |
   jq '.html.body.div // [] | .[] | select(."+@class" == "Site") | .div | .[] | select(."+@class" == "Site-inner") | .div.main.section.div.div.div.div | .[] | select(."+@class" | contains("row")) | .div | .[] | .div | .[] | select(."+@class" | contains("summary")) | .div.div.div.div.div' |
   jq '. | map({"url": (.div | .[] | select(."+@class" | contains("summary-content")) | .div | .[] | select(."+@class" == "summary-title") | .a."+@href"), "title": ((.div | .[] | select(."+@class" | contains("summary-content")) | .div | .[] | select(."+@class" == "summary-title") | .a."+content")), "created": ((.div | .[] | select(."+@class" | contains("summary-content")) | .div | .[] | select(."+@class" | contains("summary-metadata")) | .div | .[] | select(."+@class" | contains("summary-metadata--primary")) | .time."+@datetime"))})' |
   jq '. | unique | sort_by(.created) | reverse' |

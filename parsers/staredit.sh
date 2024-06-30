@@ -7,8 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-get_xml "$url" 's/<\/span>//g ; s/<span[^>]*>//g ; s/<br>/<br \/>/g' |
-  yq --xml-skip-directives --xml-skip-proc-inst --xml-raw-token=false -p xml -o json '. // {}' |
+get_xml_as_json "$url" 's/<\/span>//g ; s/<span[^>]*>//g ; s/<br>/<br \/>/g' |
   jq '.html.body.div.div // [] | .[] | select(."+@class" == "page") | .div | .[] | select(."+@id" == "page_main_content") | .table.tr.td | .[1] | .div.div' |
   jq 'map({"title": (.div | .[] | select(."+@class" == "titleBox") | .div.a."+content"), "url": (.div | .[] | select(."+@class" == "titleBox") | .div.a."+@href"), "time": (.div | .[] | select(."+@class" == "titleBox") | .div."+content" | capture("&nbsp (?<M>[JFMASONDanebrpyulgctov]{3}) (?<D>[0-9]+) (?<Y>[0-9]{4}), (?<h>[0-9]+):(?<m>[0-9]{2}) (?<clock>[ap]m)")), "user": (.div | .[] | select(."+@class" == "statusBox") | .div.img.a."+content"? // .div.a."+content"), "text": (.div | .[] | select(."+@class" == "infoBox2") | [.. ."+content"? //  empty] | flatten | join("<br />\n"))})' |
   jq 'map(. |= (if .time.clock == "am" then (if .time.h == "12" then .time.c = -12 else .time.c = 0 end) else .time.c = 12 end | .time.h = (((.time.h | tonumber) + .time.c) | tostring)))' |

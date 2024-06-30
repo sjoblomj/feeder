@@ -32,7 +32,7 @@ function get_json() {
   echo "$sitedata"
 }
 
-function get_xml() {
+function get_xml_as_json() {
   local url="$1"
   local sed_cleanup="$2"
   local header0="$3"
@@ -44,7 +44,7 @@ function get_xml() {
   if [ -z "$sitedata" ] || ! echo "$sitedata" | yq -e -px . >/dev/null 2>&1; then
     sitedata=""
   fi
-  echo "$sitedata"
+  echo "$sitedata" | yq --xml-skip-directives --xml-skip-proc-inst --xml-raw-token=false -p xml -o json '. // {}'
 }
 
 function download_data() {

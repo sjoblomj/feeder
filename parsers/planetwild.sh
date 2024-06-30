@@ -7,8 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-get_xml "$url" |
-  yq --xml-skip-directives --xml-skip-proc-inst --xml-raw-token=false -p xml -o json '. // {}' |
+get_xml_as_json "$url" |
   jq '.html.body.div // [] | .[]' |
   jq 'select(.div?.h1?."+content"? == "From our blog")' |
   jq '.div.div.div.div' |
