@@ -2,6 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.1] - 2024-07-01
+
+### Added
+
+- Site specific parser: sagafarmann
+- Site specific parser: drakenhh
+- Site specific parser: gotheborg
+- Site specific parser: planetwild
+- Site specific parser: siedler25
+- Site specific parser: staredit
+- Site specific parser: bandsintown
+
+### Changed
+
+- Refactored so that downloading and error handling is done in common functions.
+- Refactored so that conversion of xml to json is done in common functions.
+- Updated sites.yaml file to be an up to date reflection of the capabilities of the project.
+- Refactored common functions for awk parsing of specific sites to be in its own file.
+- Refactored ShadowFlare parser to use common awk functions.
+- Refactored Stormcoast-Fortress parser to use common awk functions.
+- Refactored Wardruna parser to use common awk functions.
+- The YouTrack parser now only requests relevant fields.
+- The GitHub parser can now read the created date through the `submitted_at` attribute.
+- The Atom parser can now read text through the `group.description` attribute if there is no `content["+content"]` attribute.
+- If an entry has no text, the dashboard will display an empty string instead of "null".
+- Links will have the same colour in the dashboard regardless of if they've been opened or not.
+- Refactoring and fixing code warnings.
+- Added .idea to .gitignore
+
+
 
 ## [2.0] - 2024-04-18
 
