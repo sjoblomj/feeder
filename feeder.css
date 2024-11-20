@@ -1,6 +1,7 @@
 :root{
     --icon-size: 64px;
     --bg-colour: #feeedd;
+    --site-width: 640px;
     --button-bg-colour: #fa6607;
     --line-colour: #bfbfbf;
     --eye-colour:  #333;
@@ -37,17 +38,16 @@ h1 {
     display: none;
 }
 .content {
-    display: flex;
-    flex-wrap: wrap;
+    display: grid;
+    grid-gap: 2em;
+    grid-template-columns: repeat(auto-fill, minmax(var(--site-width), 1fr));
 }
 .site {
-    width: 49%;
     height: 71vh;
     min-height: 10em;
     overflow-x: hidden;
     overflow-y: scroll;
     margin-bottom: 2em;
-    margin-left: 0.5%
 }
 .read {
     opacity: 0.4;
