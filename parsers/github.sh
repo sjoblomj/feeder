@@ -10,7 +10,7 @@ maxtextlen="${4:-4096}"
 if [[ $url =~ ^https://(api\.|www\.)?github.com/(repos/)?([^/]+)/([^/]+)/(.*)$ ]]; then
     rep="${BASH_REMATCH[3]}/${BASH_REMATCH[4]}/${BASH_REMATCH[5]}"
     url="https://api.github.com/repos/$rep"
-    url=$(echo $url | sed "s|/$||")
+    url=${url/\/$//}
     if [[ $url =~ ^.*/pull/[0-9]+$ ]]; then
         url=$(echo "$url" | sed -r "s|pull/([0-9]+)|issues/\1|")
     fi
@@ -31,7 +31,7 @@ function perform_query() {
         filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
 }
 
-if (echo "$url" | grep -Eq ^.*/issues/[0-9]+/?$); then
+if [[ $url =~ ^.*/issues/[0-9]+/?$ ]]; then
     base=$(perform_query "$url" "[.]")
     tl=$(perform_query "$url/timeline" ".")
     jq --argjson arr1 "$base" --argjson arr2 "$tl" -n '$arr1 + $arr2 | sort_by(.created) | reverse'
