@@ -9,8 +9,7 @@ maxtextlen="${4:-4096}"
 
 if [[ $url =~ ^https://(api\.|www\.)?github.com/(repos/)?([^/]+)/([^/]+)/(.*)$ ]]; then
     rep="${BASH_REMATCH[3]}/${BASH_REMATCH[4]}/${BASH_REMATCH[5]}"
-    url="https://api.github.com/repos/$rep"
-    url=${url/\/$//}
+    url="https://api.github.com/repos/${rep%/}"
     if [[ $url =~ ^.*/pull/[0-9]+$ ]]; then
         url=$(echo "$url" | sed -r "s|pull/([0-9]+)|issues/\1|")
     fi
