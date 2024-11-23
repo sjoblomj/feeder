@@ -1,8 +1,8 @@
 :root{
     --icon-size: 64px;
-    --bg-colour: #feeedd;
     --site-width: 640px;
     --button-bg-colour: #fa6607;
+    --bg-colour:   #feeedd;
     --line-colour: #bfbfbf;
     --eye-colour:  #333;
     --link-colour: #579;
@@ -107,7 +107,7 @@ h1 {
 }
 
 .feedElementText img {
-    max-width: 10em !important;
+    max-width: 75% !important;
     height: auto;
 }
 
