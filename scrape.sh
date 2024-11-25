@@ -46,7 +46,7 @@ for site in "${sites[@]}"; do
     if [[ "$insertValues" != "{}" ]]; then
         data=$(jq -n --argjson a "$data" --argjson b "$insertValues" '$a | map(. + $b)')
     fi
-    siteData=$(echo $data | jq --arg name "$name" --arg icon "$icon" --arg url "$displayUrl" --arg description "$description" --argjson data "$data" '{"name": $name, "icon": $icon, "url": $url, "description": $description, "data": $data}')
+    siteData=$(echo "$data" | jq --arg name "$name" --arg icon "$icon" --arg url "$displayUrl" --arg description "$description" --argjson data "$data" '{"name": $name, "icon": $icon, "url": $url, "description": $description, "data": $data}')
 
     delimiter=""
     if [[ "$output" != "" ]]; then
