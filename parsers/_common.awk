@@ -18,7 +18,7 @@ function make_item(text, id, title, author, url, published,  i) {
     return i
 }
 
-function make_iso_date(year, month, day,  month_arr, month_nums) {
+function make_iso_date(year, month, day,  i, month_arr, month_nums) {
     if (month !~ /[0-9]+/) {
         split("jan feb mar apr may jun jul aug sep oct nov dec", month_arr)
         for (i in month_arr)
