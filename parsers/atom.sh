@@ -9,5 +9,5 @@ maxtextlen="${4:-4096}"
 
 get_xml_as_json "$url" | \
   jq '.feed.entry // []' | \
-  jq 'map({"id": .id, "title": .title, "url": .link["+@href"], "text": (.content["+content"] // .group.description), "user": .author.name, "created": .published, "updated": .updated})' | \
+  jq 'map({"id": .id, "title": (.title["+content"]? // .title), "url": .link["+@href"], "text": (.content["+content"] // .group.description), "user": .author.name, "created": .published, "updated": .updated})' | \
   filter_and_shrink "$filter" "$maxelems" "$maxtextlen"
