@@ -10,6 +10,7 @@ function filter_and_shrink() {
   if [ -z "$text" ]; then
     text="[]"
   fi
+  filter=$(echo "$filter" | tr '[:upper:]' '[:lower:]')
 
   echo "$text" |
     jq "map(select(.title + \" \" + .text | ascii_downcase | $filter ))" |
