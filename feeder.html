@@ -1,5 +1,5 @@
 <!doctype html>
-<html>
+<html lang="en">
     <head>
         <title>Feeder</title>
         <meta charset="utf-8">
@@ -39,7 +39,7 @@
             }
 
             function hexToRgb(hex) {
-                var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+                let result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
                 return result ? {
                     r: parseInt(result[1], 16),
                     g: parseInt(result[2], 16),
@@ -76,7 +76,7 @@
                 hasUnsaved = true;
                 let saveBtn = document.getElementById("save");
                 saveBtn.style.display = "block";
-                saveBtn.onclick = e => save();
+                saveBtn.onclick = () => save();
             }
 
             function markAsSeen(siteName, id, updated) {
@@ -110,7 +110,7 @@
             function handleIcons(imgDiv, mouseOverText, pictureUrl, pictureFallbackText, imageClassName, eyeDivOnclick) {
                 let eyeDiv = document.createElement("div");
                 eyeDiv.className = "eye";
-                eyeDiv.style = "display: none";
+                eyeDiv.style.display = "none";
                 eyeDiv.title = mouseOverText;
                 let img;
                 if (pictureUrl && pictureUrl !== "null") {
@@ -123,7 +123,7 @@
                         .split(" ")
                         .map(i => i.charAt(0))
                         .join("")
-                        .substr(0, 2);
+                        .substring(0, 2);
 
                     let bgColour  = stringToColour(pictureFallbackText);
                     let txtColour = getContrastedColour(bgColour);
@@ -135,7 +135,7 @@
                     img.appendChild(document.createTextNode(initials));
                 }
                 img.className += imageClassName;
-                imgDiv.onmouseenter = e => {
+                imgDiv.onmouseenter = () => {
                     img.style.setProperty("display", "none");
                     eyeDiv.style.setProperty("display", "block");
                 }
@@ -170,7 +170,7 @@
 
                 let userName = data.user ? data.user : "";
 
-                let eyeDivOnclick = e => {
+                let eyeDivOnclick = () => {
                     markAsSeen(siteName, data.id, data.updated);
                     root.className = "feedElement read";
                 }
@@ -218,7 +218,7 @@
                 let imgDiv = document.createElement("div");
                 imgDiv.className = "feedHeaderImg";
 
-                let eyeDivOnclick = e => {
+                let eyeDivOnclick = () => {
                     siteData.data.forEach(d => markAsSeen(siteData.name, d.id, d.updated));
                     let entries = document.getElementsByName(siteData.name);
                     entries.forEach(ent => ent.className = "feedElement read");
@@ -247,7 +247,7 @@
                 fetch("sitedata.json")   .then(res => { if (res.ok) return res.json(); else return []; }),
                 fetch("seenentries.json").then(res => { if (res.ok) return res.json(); else return []; })
             ]).then(([sites, seenEntriesJson]) => {
-                if (sites.length == 0) {
+                if (sites.length === 0) {
                     let root = document.getElementById("contentWithUpdates");
                     let h1 = document.createElement("h1");
                     h1.appendChild(document.createTextNode(feederText));
