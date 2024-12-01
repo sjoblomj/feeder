@@ -2,6 +2,26 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.2] - 2024-12-01
+
+### Added
+
+- The GitHub parser now handles pagination and will fetch the latest entries rather than the first entries.
+
+### Changed
+
+- Filters are now case-insensitive.
+- The number of columns in the dashboard will now depend on the screen size; larger screens will have more columns.
+- Adjustment to image sizes in the dashboard.
+- The Atom parser can now read titles through the `title[content]` attribute if it exists.
+- The Atom parser can now read text through the `summary.div.p` attribute if there is no `content["+content"]` or `group.description` attribute.
+- Fixing code warnings in the GitHub parser.
+- Fixing code warnings in the awk common library.
+- Fixing code warnings in the scrape script.
+- Fixing code warnings in the Dashboard.
+
+
+
 ## [2.1] - 2024-07-01
 
 ### Added
