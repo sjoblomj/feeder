@@ -11,8 +11,8 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - Filters are now case-insensitive.
-- The number of columns in the dashboard will now depend on the screen size; larger screens will have more columns.
-- Adjustment to image sizes in the dashboard.
+- The number of columns in the Dashboard will now depend on the screen size; larger screens will have more columns.
+- Adjustment to image sizes in the Dashboard.
 - The Atom parser can now read titles through the `title[content]` attribute if it exists.
 - The Atom parser can now read text through the `summary.div.p` attribute if there is no `content["+content"]` or `group.description` attribute.
 - Fixing code warnings in the GitHub parser.
@@ -46,8 +46,8 @@ All notable changes to this project will be documented in this file.
 - The YouTrack parser now only requests relevant fields.
 - The GitHub parser can now read the created date through the `submitted_at` attribute.
 - The Atom parser can now read text through the `group.description` attribute if there is no `content["+content"]` attribute.
-- If an entry has no text, the dashboard will display an empty string instead of "null".
-- Links will have the same colour in the dashboard regardless of if they've been opened or not.
+- If an entry has no text, the Dashboard will display an empty string instead of "null".
+- Links will have the same colour in the Dashboard regardless of if they've been opened or not.
 - Refactoring and fixing code warnings.
 - Added .idea to .gitignore
 
@@ -91,8 +91,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Sites without an icon will now be handled properly.
-- Minor stylistic changes: When hovering over icons, the author text no longer makes a tiny jump.
+- Sites without an icon will now be handled properly in the Dashboard.
+- Minor stylistic changes in the Dashboard: When hovering over icons, the author text no longer makes a tiny jump.
 
 
 
@@ -111,16 +111,17 @@ All notable changes to this project will be documented in this file.
 
 ## [1.7] - 2024-03-29
 
-### Changed
-
-- The parsers are now resilient to network problems. They will time out after 10 seconds and will no longer result in invalid json results.
-- Minor stylistic changes.
-
 ### Added
 
 - Added the `description` parameter in sites.yaml and Dashboard. It can be used to give a description of the sites.
 - Site-specific parsers for ShadowFlare and Stormcoast-Fortress.
 - This Changelog file.
+
+
+### Changed
+
+- The parsers are now resilient to network problems. They will time out after 10 seconds and will no longer result in invalid json results.
+- Minor stylistic changes.
 
 
 
@@ -173,7 +174,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Tidying up timestamps on the Dashboard to improve readability.
+- Tidying up timestamps in the Dashboard to improve readability.
 
 
 
@@ -221,7 +222,7 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Cleaned up code
+- Cleaned up code.
 
 
 
@@ -229,7 +230,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Will now generate a random (but deterministic) background colour on the Dashboard, when the author does not have an icon. Previously, that fallback background colour was always the same, but it will now be different for different authors.
+- Will now generate a random (but deterministic) background colour in the Dashboard, when the author does not have an icon. Previously, that fallback background colour was always the same, but it will now be different for different authors.
 
 
 
@@ -237,7 +238,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Crude support for filters. Search terms can be given in the sites.yaml file, and site data will only be kept if the title or text contains that search term. It supports regex.
+- Crude support for filters. Search terms can be given in the sites.yaml file, and site data will only be kept if the title or text contains that search term. It supports [regex](https://en.wikipedia.org/wiki/Regular_expression).
 
 
 
@@ -245,7 +246,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- A HTML dashboard for showing scraped data.
+- A HTML Dashboard for showing scraped data.
 - Support for specifying `insertValues` in the sites.yaml file, which can be used to insert key-values into the scraped data.
 
 ### Changed
