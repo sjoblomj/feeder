@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.3] - ???
+
+### Removed
+
+- Removed site specific parser: planetwild - a feed is avaiable at https://planetwild.com/blog/rss.xml
+
+
+
 ## [2.2] - 2024-12-01
 
 ### Added
