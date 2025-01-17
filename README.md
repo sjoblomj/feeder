@@ -43,7 +43,6 @@ There are a number of general parsers that are supported:
 * siedler25 - Custom parser for the site siedler25.org
 * staredit - Custom parser for the site staredit.net
 * stormcoast-fortress - Custom parser for the site stormcoast-fortress.net
-* wardruna - Custom parser for the site wardruna.com
  
 
 ## Yaml configuration
