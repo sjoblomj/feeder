@@ -38,7 +38,6 @@ There are a number of general parsers that are supported:
 * bandsintown - Custom parser for the concert API at bandsintown
 * drakenhh - Custom parser for the site drakenhh.com
 * gotheborg - Custom parser for the site gotheborg.se
-* sagafarmann - Custom parser for the site sagafarmann.com
 * shadowflare - Custom parser for the site sfsrealm.hopto.org
 * siedler25 - Custom parser for the site siedler25.org
 * staredit - Custom parser for the site staredit.net

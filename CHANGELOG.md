@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Removed site specific parser: planetwild - a feed is avaiable at https://planetwild.com/blog/rss.xml
 - Removed site specific parser: wardruna - a feed is available at https://wardruna.com/news/rss.xml
+- Removed site specific parser: sagafarmann - page has been decommissioned
 
 
 
