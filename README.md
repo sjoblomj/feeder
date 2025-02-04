@@ -37,6 +37,7 @@ There are a number of general parsers that are supported:
 ### Site specific
 * bandsintown - Custom parser for the concert API at bandsintown
 * drakenhh - Custom parser for the site drakenhh.com
+* femern - Custom parser for the site femern.com
 * gotheborg - Custom parser for the site gotheborg.se
 * shadowflare - Custom parser for the site sfsrealm.hopto.org
 * siedler25 - Custom parser for the site siedler25.org

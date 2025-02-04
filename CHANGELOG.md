@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [2.3] - ???
 
+### Added
+
+- Site specific parser: femern
+
 ### Removed
 
 - Removed site specific parser: planetwild - a feed is avaiable at https://planetwild.com/blog/rss.xml
