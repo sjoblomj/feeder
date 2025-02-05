@@ -35,6 +35,7 @@ There are a number of general parsers that are supported:
 * youtrack - Parser for issues on YouTrack
 
 ### Site specific
+* auroramålet - Custom parser for the site auroramålet.se
 * bandsintown - Custom parser for the concert API at bandsintown
 * drakenhh - Custom parser for the site drakenhh.com
 * femern - Custom parser for the site femern.com
