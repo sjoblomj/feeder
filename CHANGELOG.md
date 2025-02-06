@@ -8,6 +8,7 @@ All notable changes to this project will be documented in this file.
 
 - Site specific parser: auroramålet
 - Site specific parser: femern
+- Site specific parser: globalsolarcouncil
 
 ### Removed
 
