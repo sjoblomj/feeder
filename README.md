@@ -41,6 +41,7 @@ There are a number of general parsers that are supported:
 * femern - Custom parser for the site femern.com
 * globalsolarcouncil - Custom parser for the site globalsolarcouncil.org
 * gotheborg - Custom parser for the site gotheborg.se
+* isof - Custom parser for the site isof.se
 * shadowflare - Custom parser for the site sfsrealm.hopto.org
 * siedler25 - Custom parser for the site siedler25.org
 * staredit - Custom parser for the site staredit.net
