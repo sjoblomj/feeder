@@ -10,6 +10,7 @@ All notable changes to this project will be documented in this file.
 - Site specific parser: femern
 - Site specific parser: globalsolarcouncil
 - Site specific parser: isof
+- Site specific parser: railsweden
 
 ### Removed
 
