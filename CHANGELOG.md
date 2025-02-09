@@ -18,6 +18,10 @@ All notable changes to this project will be documented in this file.
 - Removed site specific parser: wardruna - a feed is available at https://wardruna.com/news/rss.xml
 - Removed site specific parser: sagafarmann - page has been decommissioned
 
+### Changed
+
+- The GitHub parser now filters away events of type `assigned`, `labeled`, `subscribed` and `unsubscribed`.
+ 
 
 
 ## [2.2] - 2024-12-01
