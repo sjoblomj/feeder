@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.3] - ???
+## [2.3] - 2025-02-10
 
 ### Added
 
@@ -21,7 +21,9 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - The GitHub parser now filters away events of type `assigned`, `labeled`, `subscribed` and `unsubscribed`.
- 
+- Updated Dashboard help message.
+- Updated Readme.
+
 
 
 ## [2.2] - 2024-12-01
