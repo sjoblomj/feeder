@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.4] - Unreleased
+
+### Added
+
+- Site specific parser StarEdit can now handle news items from the same day.
+
+
+
 ## [2.3] - 2025-02-10
 
 ### Added
