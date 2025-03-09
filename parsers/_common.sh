@@ -54,5 +54,5 @@ function download_data() {
   local header1="$3"
   local header2="$4"
 
-  curl --connect-timeout 10 -sL --compressed "$url" ${header0:+-H "$header0"} ${header1:+-H "$header1"} ${header2:+-H "$header2"}
+  curl --connect-timeout 10 -sL --compressed --insecure "$url" ${header0:+-H "$header0"} ${header1:+-H "$header1"} ${header2:+-H "$header2"}
 }
