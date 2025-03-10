@@ -8,6 +8,10 @@ All notable changes to this project will be documented in this file.
 
 - Site specific parser StarEdit can now handle news items from the same day.
 
+### Changed
+
+- Will now download sites with invalid certificates
+
 
 
 ## [2.3] - 2025-02-10
