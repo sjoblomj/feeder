@@ -10,7 +10,8 @@ All notable changes to this project will be documented in this file.
 
 ### Changed
 
-- Will now download sites with invalid certificates
+- Will now download sites with invalid certificates.
+- Updated Femern parser after site layout change.
 
 
 
