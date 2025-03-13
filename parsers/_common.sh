@@ -43,6 +43,7 @@ function get_xml_as_json() {
 
   sitedata=$(download_data "$url" "$header0" "$header1" "$header2" | sed "$sed_cleanup")
   if [ -z "$sitedata" ] || ! echo "$sitedata" | yq -e -px . >/dev/null 2>&1; then
+    >&2 echo "Error: Failed to parse XML data from $url"
     sitedata=""
   fi
   echo "$sitedata" | yq --xml-skip-directives --xml-skip-proc-inst --xml-raw-token=false -p xml -o json '. // {}'
