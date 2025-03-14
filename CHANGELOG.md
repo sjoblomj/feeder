@@ -2,7 +2,7 @@
 
 All notable changes to this project will be documented in this file.
 
-## [2.4] - Unreleased
+## [2.4] - 2025-03-14
 
 ### Added
 
@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 
 - Will now download sites with invalid certificates.
 - Updated Femern parser after site layout change.
+- Will now output warning if failing to parse XML data.
 
 
 
