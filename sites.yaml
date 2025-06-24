@@ -77,13 +77,40 @@ sites:
     parser: atom
     description: News from keyboard maker Keyboardio.
 
-  - name: Planet Wild Blog
-    url:  "https://planetwild.com/blog"
-    icon: "https://cdn.prod.website-files.com/665f17d0fb4bfc1e811460d0/66a8b28199611411c83fbd2b_logo-medium.svg"
-    parser: planetwild
-    description: Blog of Planet Wild, aiming to restore ecosystems.
+  - name: Auroramålet
+    url:  "https://auroramålet.se/nyheter/"
+    icon: "https://wsrv.nl/?url=yt3.googleusercontent.com/jRUk5d6eQrhaWJilQ6LAO-lOUmpWwwuy47T-27ah61VXsQoiUocC0qeqss_Qd9w1A_WyxTNu1x4"
+    parser: auroramålet
+    description: Organization that is suing the Swedish government for inaction regarding climate change.
     insertValues:
-      - userPicture: "https://cdn.prod.website-files.com/665f17d0fb4bfc1e811460d0/66a8b28199611411c83fbd2b_logo-medium.svg"
+      - user: Auroramålet
+      - userPicture: "https://wsrv.nl/?url=yt3.googleusercontent.com/jRUk5d6eQrhaWJilQ6LAO-lOUmpWwwuy47T-27ah61VXsQoiUocC0qeqss_Qd9w1A_WyxTNu1x4"
+
+  - name: Fehmarnbelt tunnel
+    url:  "https://femern.com/press/news/"
+    icon: "https://femern.com/app/pwa-files/femern_apple-touch-icon.png"
+    parser: femern
+    description: News from the project to build a car and railway tunnel between Denmark and Germany.
+    insertValues:
+      - userPicture: "https://femern.com/app/pwa-files/femern_apple-touch-icon.png"
+
+  - name: Rail Sweden
+    url:  "https://railsweden.lindholmen.se/sv/nyheter"
+    icon: "https://railsweden.lindholmen.se/sites/default/files/favicon/favicon_96x96.png"
+    parser: railsweden
+    description: News from the Swedish freight railway company Rail Sweden.
+    insertValues:
+      - user: Rail Sweden
+      - userPicture: "https://railsweden.lindholmen.se/sites/default/files/favicon/favicon_96x96.png"
+
+  - name: Global Solar Council
+    url:  "https://www.globalsolarcouncil.org/news/"
+    icon: "https://wsrv.nl/?url=yt3.googleusercontent.com/V1se0tXHZ0lWfnsFqIzlJPb0zt0kdO3X32Z5B7O6aIEdzCZ6QBeJC9a2udUjHwHveMQuBIe5HcU=s160-c-k-c0x00ffffff-no-rj"
+    parser: globalsolarcouncil
+    description: Organization working to advance the use of solar power.
+    insertValues:
+      - user: Global Solar Council
+      - userPicture: "https://wsrv.nl/?url=yt3.googleusercontent.com/V1se0tXHZ0lWfnsFqIzlJPb0zt0kdO3X32Z5B7O6aIEdzCZ6QBeJC9a2udUjHwHveMQuBIe5HcU=s160-c-k-c0x00ffffff-no-rj"
 
   - name: Götheborg of Sweden news
     url:  "https://www.gotheborg.se/nyheter/"
@@ -102,22 +129,14 @@ sites:
       - user: Draken Harald Hårfagre
       - userPicture: "https://images.squarespace-cdn.com/content/v1/5957f58ebe6594dbcffacf91/1510661138870-2J152MO68AOLSWBD0GV8/favicon.ico"
 
-  - name: Saga Farmann Press releases
-    url:  "https://www.sagafarmann.com/pressarchive"
-    icon: "https://www.sagafarmann.com/_next/image?url=%2FSaga_Med_org_page-0001-removebg-preview.png&w=64&q=100"
-    parser: sagafarmann
-    description: News from the viking ship Saga Farmann
+  - name: Folkminnesbloggen
+    url:  "https://www.isof.se/folkminnen/folkminnesbloggen"
+    icon: "https://www.isof.se/images/18.44b3b69f179568601f18d7b2/1623070502588/favicon.ico"
+    parser: isof
+    description: Swedish blog about Nordic folklore, believes and stories.
     insertValues:
-      - userPicture: "https://www.sagafarmann.com/_next/image?url=%2FSaga_Med_org_page-0001-removebg-preview.png&w=64&q=100"
-
-  - name: Wardruna
-    url:  "https://wardruna.com/news/"
-    icon: "https://sropr.com/wp-content/uploads/2020/02/logo_wardruna_symbol-web.png"
-    parser: wardruna
-    description: News from the nordic folk band Wardruna.
-    insertValues:
-      - user: Wardruna
-      - userPicture: "https://i.pinimg.com/originals/7e/36/e7/7e36e7d843fc8d095349a7aff6b4f770.jpg"
+      - user: ISOF
+      - userPicture: "https://www.isof.se/images/18.44b3b69f179568601f18d7b2/1623070502588/favicon.ico"
 
   - name: Wardruna Concerts
     url:  "https://rest.bandsintown.com/V3.1/artists/wardruna/events/?app_id=js_wardruna.com"
