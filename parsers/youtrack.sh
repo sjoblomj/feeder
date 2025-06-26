@@ -7,7 +7,7 @@ filter="$2"
 maxelems="${3:-15}"
 maxtextlen="${4:-4096}"
 
-if [[ $url =~ ^https://youtrack.jetbrains.com/(api/issues|issue)/(JBR-[0-9]+)/?$ ]]; then
+if [[ $url =~ ^https://youtrack.jetbrains.com/(api/issues|issue)/([A-Z]+-[0-9]+)/?$ ]]; then
     issuenumber="${BASH_REMATCH[2]}"
     url="https://youtrack.jetbrains.com/api/issues/$issuenumber"
 else
