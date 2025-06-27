@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.5] - 2025-06-27
+
+### Added
+
+- The YouTrack parser now has support for handling all issue ids.
+
+### Changed
+
+- Scraper script now fetches different domains in parallel, greatly speeding up the scraping process. Sites from the same domain will still be fetched sequentially.
+- Updated sites.yaml file to reflect the current capabilities of the project.
+
+
+
 ## [2.4] - 2025-03-14
 
 ### Added
